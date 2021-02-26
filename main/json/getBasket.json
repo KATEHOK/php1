@@ -1,0 +1,16 @@
+[
+    {
+        "id_product": 123,
+        "product_name": "Notebook",
+        "price": 1000,
+        "img": "img/123.jpg",
+        "quantity": 1
+    },
+    {
+        "id_product": 456,
+        "product_name": "Mouse",
+        "price": 15,
+        "img": "img/456.jpg",
+        "quantity": 1
+    }
+]

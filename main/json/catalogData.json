@@ -1,0 +1,38 @@
+[
+    {
+        "id_product": 123,
+        "product_name": "Notebook",
+        "price": 1000,
+        "img": "img/123.jpg"
+    },
+    {
+        "id_product": 456,
+        "product_name": "Mouse",
+        "price": 15,
+        "img": "img/456.jpg"
+    },
+    {
+        "id_product": 893,
+        "product_name": "Monitor",
+        "price": 500,
+        "img": "img/893.jpg"
+    },
+    {
+        "id_product": 125,
+        "product_name": "Phone",
+        "price": 1000,
+        "img": "img/125.jpg"
+    },
+    {
+        "id_product": 483,
+        "product_name": "Printer",
+        "price": 800,
+        "img": "img/483.jpg"
+    },
+    {
+        "id_product": 348,
+        "product_name": "Keyboard",
+        "price": 20,
+        "img": "img/348.jpg"
+    }
+]
