@@ -37,7 +37,7 @@
     <script defer src="js/main.js"></script>
 </head>
 <body> 
-    <!-- Буду использовать своей зачётный проект с курса JS2 -->
+    <!-- Буду использовать своей зачётный проект с курса JavaScript 2 -->
     <div class="body-container" id="app">
         <div class="main-wrapper container">
             <header class="main-header">
