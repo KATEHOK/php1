@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+const strict_types = 1;
+ini_set('error_reporting', (string)E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,15 +18,11 @@
 
 <body>
     <main class="main">
-        <ul class="galery">
-            <li class="galery_item"><img class="pic_mini" src="img/mini/1143.jpg" alt="photo"></li>
-            <li class="galery_item"><img class="pic_mini" src="img/mini/5556494.jpg" alt="photo"></li>
-            <li class="galery_item"><img class="pic_mini" src="img/mini/584598.jpg" alt="photo"></li>
-            <li class="galery_item"><img class="pic_mini" src="img/mini/65494.jpg" alt="photo"></li>
-            <li class="galery_item"><img class="pic_mini" src="img/mini/8549.jpg" alt="photo"></li>
-            <li class="galery_item"><img class="pic_mini" src="img/mini/564654165.jpg" alt="photo"></li>
-        </ul>
-        <form method="post"></form>
+        <?php
+        require_once('../engine/functions.php');
+        renderGalery('img/mini/', '../public/img/mini'); // фунция в папке engine в файле function
+        ?>
+        <!-- <form method="post"></form> -->
     </main>
 </body>
 
