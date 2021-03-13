@@ -20,7 +20,7 @@ ini_set('display_startup_errors', '1');
     <main class="main">
         <?php
         require_once('../engine/functions.php');
-        renderGalery('img/mini/', '../public/img/mini'); // фунция в папке engine в файле function
+        renderGalery('../public/img/mini', 'img/mini/'); // фунция в папке engine в файле function
         ?>
         <!-- <form method="post"></form> -->
     </main>
