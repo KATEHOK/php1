@@ -21,7 +21,7 @@ ini_set('display_startup_errors', '1');
     <main class="main">
         <?php
         require_once('../engine/functions.php');
-        renderGalery('../public/img/mini', 'img/mini/'); // фунция в папке engine в файле function
+        renderGalery('../public/img/mini', 'img/mini/', 'img/'); // фунция в папке engine в файле function
         ?>
         <form method="post" enctype="multipart/form-data" class="form" action="../engine/upload/img.php">
             <input type="file" name="input_img" id="input-img" class="input input-file">
