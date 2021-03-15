@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +23,12 @@ ini_set('display_startup_errors', '1');
         require_once('../engine/functions.php');
         renderGalery('../public/img/mini', 'img/mini/'); // фунция в папке engine в файле function
         ?>
-        <!-- <form method="post"></form> -->
+        <form method="post" enctype="multipart/form-data" class="form" action="../engine/upload/img.php">
+            <input type="file" name="input_img" id="input-img" class="input input-file">
+            <input type="submit" value="submit" class="input input-submit" name="submit_img">
+        </form>
+        <?php
+        ?>
     </main>
 </body>
 
