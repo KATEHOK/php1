@@ -13,7 +13,9 @@ $isAdmin = true;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyShop</title>
+    <title>MyShop<?php if ($isAdmin) {
+                        echo " (admin)";
+                    } ?></title>
     <link rel="stylesheet" href="style/main.css">
 </head>
 
@@ -27,7 +29,7 @@ $isAdmin = true;
             echo "
             <form action='./private/add_product.php' method='post'>
                 <input type='hidden' name='user_id' value='1'>
-                <input type='submit' value='Добавить новый товар'>
+                <input type='submit' value='Добавить новый товар' class='btn'>
             </form>";
         }
         ?>

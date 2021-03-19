@@ -14,12 +14,12 @@ ini_set('display_startup_errors', '1');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/main.css">
-    <title>Admin mode "create"</title>
+    <title>MyShop (admin)</title>
 </head>
 
 <body>
     <main class="main">
-        <a href="../" class="back">На главную</a>
+        <a href="../" class="btn">На главную</a>
         <form method="post" enctype="multipart/form-data" class="add_product catalog" action="./upload.php">
             <fieldset class="add_product_wrapper">
                 <label class="label add_product_item">

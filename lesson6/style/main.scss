@@ -26,6 +26,7 @@ textarea {
     }
 }
 .btn {
+    text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 18px;
@@ -136,19 +137,6 @@ textarea {
 }
 .hide {
     display: none;
-}
-.back {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 15px 0;
-    font-weight: 600;
-    font-size: 28px;
-    text-decoration: none;
-    box-sizing: border-box;
-    border-radius: 5px 10px;
-    padding: 5px;
-    border: 1px solid rgb(207, 141, 19);
-    background-color: rgb(255, 201, 100);
-    color: rgb(114, 74, 0);
 }
 .main_product {
     display: flex;
