@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+input,
+button,
+textarea {
+  outline: none;
+}
+
 .main {
   margin: 0 auto;
   max-width: 1200px;
@@ -17,6 +23,28 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.label_span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .gallery {
@@ -77,6 +105,7 @@
 }
 
 .back {
+  font-family: Arial, Helvetica, sans-serif;
   margin: 15px 0;
   font-weight: 600;
   font-size: 28px;
@@ -126,5 +155,74 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.add_product {
+  margin-top: 15px;
+  padding: 15px;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.add_product_wrapper {
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.add_product_description {
+  resize: none;
+}
+
+.add_product_name, .add_product_description {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  color: #724a00;
+  background-color: #ffd88e;
+  border: 1px solid #885800;
+}
+
+.add_product_submit {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px;
+  border-radius: 5px;
+  color: #724a00;
+  background-color: #ffd88e;
+  border: 1px solid #885800;
+  -webkit-transition: border-color 300ms ease-out background-color 300ms ease-out color 300ms ease-out;
+  transition: border-color 300ms ease-out background-color 300ms ease-out color 300ms ease-out;
+}
+
+.add_product_submit:hover {
+  color: #ffd88e;
+  background-color: #885800;
+  border-color: #724a00;
+}
+
+.add_product_submit:active {
+  color: #724a00;
+  background-color: #ffd88e;
+  border-color: #885800;
 }
 /*# sourceMappingURL=main.css.map */

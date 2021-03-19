@@ -19,7 +19,7 @@ ini_set('display_startup_errors', '1');
 <body>
     <main class="main_full">
         <div class="full_wrapper">
-            <a href="/" class="back">Назад</a>
+            <a href="/" class="back">На главную</a>
             <?php
             echo "<img src='../img/{$_POST['link']}' class='full_img' alt='photo'>";
             include("./db_open.php");

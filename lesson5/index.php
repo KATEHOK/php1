@@ -23,10 +23,7 @@ ini_set('display_startup_errors', '1');
         require_once("./private/functions.php");
         renderGalery();
         ?>
-        <!-- <form method="post" enctype="multipart/form-data" class="form" action="../engine/upload/img.php">
-            <input type="file" name="input_img" id="input-img" class="input input-file">
-            <input type="submit" value="submit" class="input input-submit" name="submit_img">
-        </form> -->
+        <a href="./private/add_product.php">Добавить новый товар</a>
     </main>
 </body>
 
