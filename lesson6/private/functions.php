@@ -13,7 +13,7 @@
  * @param str $descriptionClass класс описания
  * @param str $alt текст alt-атрибута изображения
  */
-function renderCatalog($productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
+function renderCatalog($isAdmin, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
     include("./private/db_open.php");
     echo "<form action='$productLink' method='post' class='$wrapperClass'>";
@@ -22,6 +22,7 @@ function renderCatalog($productLink = './private/product.php', $wrapperClass = '
     while ($row = mysqli_fetch_assoc($query)) {
         echo "        
         <label class='$itemClass'>
+            <input type='hidden' value='$isAdmin' name='is_admin'>
             <input type='submit' value='{$row['img']}' name='link' class='hide'>
             <p class='$txtClass $titleClass'>{$row['name']}</p>
             <img src='../img/{$row['img']}' alt='$alt' class='$imgClass'>

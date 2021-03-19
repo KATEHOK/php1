@@ -23,7 +23,7 @@ $isAdmin = true;
     <main class="main">
         <?php
         require_once("./private/functions.php");
-        renderCatalog();
+        renderCatalog($isAdmin);
         if ($isAdmin) {
             // На этапе разработки по умолчанию $isAdmin = true
             echo "
