@@ -3,11 +3,11 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
+$isAdmin = true;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
     <meta charset="UTF-8">
@@ -21,10 +21,18 @@ ini_set('display_startup_errors', '1');
     <main class="main">
         <?php
         require_once("./private/functions.php");
-        renderGalery();
+        renderCatalog();
+        if ($isAdmin) {
+            // На этапе разработки по умолчанию $isAdmin = true
+            echo "
+            <form action='./private/add_product.php' method='post'>
+                <input type='hidden' name='user_id' value='1'>
+                <input type='submit' value='Добавить новый товар'>
+            </form>";
+        }
         ?>
-        <a href="./private/add_product.php">Добавить новый товар</a>
     </main>
+
 </body>
 
 </html>

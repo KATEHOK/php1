@@ -17,13 +17,13 @@ ini_set('display_startup_errors', '1');
 </head>
 
 <body>
-    <main class="main_full">
-        <div class="full_wrapper">
+    <main class="main_product">
+        <div class="product_wrapper">
             <a href="/" class="back">На главную</a>
             <?php
-            echo "<img src='../img/{$_POST['link']}' class='full_img' alt='photo'>";
+            echo "<img src='../img/{$_POST['link']}' class='product_img' alt='photo'>";
             include("./db_open.php");
-            $query = mysqli_query($link, "update pics set `view` = `view` + 1 where `name` = '{$_POST['link']}'");
+            $query = mysqli_query($link, "update catalog set `view` = `view` + 1 where `img` = '{$_POST['link']}'");
             include('./db_close.php');
             ?>
         </div>
