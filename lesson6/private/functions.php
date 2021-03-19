@@ -8,22 +8,30 @@
  * @param str $imgClass класс изображения
  * @param str $emptyClass класс сообщения о пустоте
  * @param str $txtClass класс текстовых элементов
+ * @param str $titleClass класс заголовка
+ * @param str $infoClass класс инфо-обёртки
+ * @param str $descriptionClass класс описания
  * @param str $alt текст alt-атрибута изображения
  */
-function renderCatalog($productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $alt = 'photo')
+function renderCatalog($productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
     include("./private/db_open.php");
     echo "<form action='$productLink' method='post' class='$wrapperClass'>";
-    $query = mysqli_query($link, "select id, `name`, img, view, count, price from catalog order by view desc;");
+    $query = mysqli_query($link, "select id, `name`, img, view, count, price, description from catalog order by view desc;");
     $isEmpty = true;
     while ($row = mysqli_fetch_assoc($query)) {
         echo "        
         <label class='$itemClass'>
             <input type='submit' value='{$row['img']}' name='link' class='hide'>
+            <p class='$txtClass $titleClass'>{$row['name']}</p>
             <img src='../img/{$row['img']}' alt='$alt' class='$imgClass'>
-            <p class='$txtClass'>Views: {$row['view']}</p>
+            <div class='$infoClass'>
+                <p class='$txtClass'>Price: {$row['price']}</p>
+                <p class='$txtClass'>Count: {$row['count']}</p>
+                <p class='$txtClass'>Views: {$row['view']}</p>
+            </div>
+            <p class='$txtClass $descriptionClass'>{$row['description']}</p>
         </label>";
-
         $isEmpty = false;
     }
     if (!$link) {

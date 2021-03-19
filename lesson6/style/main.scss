@@ -29,6 +29,25 @@ textarea {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 18px;
+    box-sizing: border-box;
+        padding: 5px;
+        border-radius: 5px;
+        color: rgb(114, 74, 0);
+        background-color: rgb(255, 216, 142);
+        border: 1px solid rgb(136, 88, 0);
+        transition: border-color 300ms ease-out,
+                    background-color 300ms ease-out,
+                    color 300ms ease-out;
+        &:hover {
+            color: rgb(255, 216, 142);
+            background-color: rgb(136, 88, 0);
+            border-color: rgb(114, 74, 0);
+        }
+        &:active {
+            color: rgb(114, 74, 0);
+            background-color: rgb(255, 216, 142);
+            border-color: rgb(136, 88, 0);
+        }
 }
 .catalog {
     box-sizing: border-box;
@@ -48,15 +67,57 @@ textarea {
         padding: 10px;
         border: 1px solid rgb(170, 110, 0);
         background-color: rgb(255, 216, 142);
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin: 5px;
+        transition: color 300ms ease-out,
+                    background-color 300ms ease-out,
+                    border-color 300ms ease-out;
+
+        &_info {
+            align-self: stretch;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
 
         &_txt {
+            max-width: 300px;
             margin-top: 5px;
             font-family: Arial, Helvetica, sans-serif;
             font-weight: 600;
             font-size: 16px;
             color: rgb(114, 74, 0);
+            transition: color 300ms ease-out;
+        }
+
+        &_title {
+            margin: 5px 0;
+            font-size: 24px;
+        }
+
+        &_description {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        &:hover {
+            background-color: rgb(170, 110, 0);
+            border-color: rgb(114, 74, 0);
+            
+            & .catalog_item_txt {
+                color: rgb(255, 216, 142);
+            }
+        }
+
+        &:active {
+            background-color: rgb(255, 216, 142);
+            border-color: rgb(170, 110, 0);
+            
+            & .catalog_item_txt {
+                color: rgb(114, 74, 0);
+            }
         }
     }
 }
@@ -88,7 +149,11 @@ textarea {
     border: 1px solid rgb(207, 141, 19);
     background-color: rgb(255, 201, 100);
     color: rgb(114, 74, 0);
-    // align-self: flex-start;
+}
+.main_product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .product_img {
     box-sizing: border-box;
@@ -104,11 +169,6 @@ textarea {
     flex-direction: column;
     align-items: flex-start;
     margin: 0 auto;
-}
-.main_product {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 .add_product {
     margin-top: 15px;
@@ -129,8 +189,7 @@ textarea {
         resize: none;
     }
 
-    &_name,
-    &_description {
+    &_input {
         box-sizing: border-box;
         padding: 5px;
         font-family: Arial, Helvetica, sans-serif;
@@ -138,27 +197,24 @@ textarea {
         color: rgb(114, 74, 0);
         background-color: rgb(255, 216, 142);
         border: 1px solid rgb(136, 88, 0);
+
+        &_file {
+            display: none;
+
+            &_btn {
+                font-weight: 500;
+            }
+            &_name {
+                max-width: 300px;
+            }
+        }
+    }
+
+    &_item {
+        margin-bottom: 10px;
     }
 
     &_submit {
-        box-sizing: border-box;
-        padding: 5px;
-        border-radius: 5px;
-        color: rgb(114, 74, 0);
-        background-color: rgb(255, 216, 142);
-        border: 1px solid rgb(136, 88, 0);
-        transition: border-color 300ms ease-out
-                    background-color 300ms ease-out
-                    color 300ms ease-out;
-        &:hover {
-            color: rgb(255, 216, 142);
-            background-color: rgb(136, 88, 0);
-            border-color: rgb(114, 74, 0);
-        }
-        &:active {
-            color: rgb(114, 74, 0);
-            background-color: rgb(255, 216, 142);
-            border-color: rgb(136, 88, 0);
-        }
+        margin: 0;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-// header("Location: ./add_product.php");
+header("Location: ./add_product.php");
 const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
@@ -20,7 +20,7 @@ if (empty($_FILES['img']) || !isset($prodactName) || !isset($description) || !is
 // echo '<br>';
 // var_dump($_POST);
 // Для наглядности запсос к БД тоже делаю переменной
-$query = "insert into catalog (`name`, price, count, img, creator_id) values ('$prodactName', $productPrice, $productCount, '$imgName', $userId);";
+$query = "insert into catalog (`name`, price, count, img, creator_id, description) values ('$prodactName', $productPrice, $productCount, '$imgName', $userId, '$description');";
 // Импортирую файл, подключающий БД
 include("./db_open.php");
 // Выполняю запрос к БД
