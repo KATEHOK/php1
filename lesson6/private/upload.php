@@ -1,6 +1,6 @@
 <?php
-$isAdmin = true; // Пока что по умолчанию
-if (!$isAdmin) {
+require_once('./functions.php');
+if (!isAdmin()) {
     header('Location: ../client.php');
     die;
 } else {

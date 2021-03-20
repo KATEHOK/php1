@@ -15,6 +15,7 @@
  */
 function renderCatalog($isAdmin = false, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
+    // if (isAdmin()) { 
     if ($isAdmin) {
         $productLink = './private/product_admin.php';
     }
@@ -25,8 +26,8 @@ function renderCatalog($isAdmin = false, $productLink = './private/product.php',
     while ($row = mysqli_fetch_assoc($query)) {
         echo "        
         <label class='$itemClass'>
-            <input type='hidden' value='$isAdmin' name='is_admin'>
-            <input type='submit' value='{$row['img']}' name='link' class='hide'>
+            <!-- <input type='hidden' value='{$row['id']}' name='id'> -->
+            <input type='submit' value='{$row['id']}' name='id' class='hide'>
             <p class='$txtClass $titleClass'>{$row['name']}</p>
             <img src='../img/{$row['img']}' alt='$alt' class='$imgClass'>
             <div class='$infoClass'>
@@ -45,4 +46,20 @@ function renderCatalog($isAdmin = false, $productLink = './private/product.php',
     }
     echo '</form>';
     include("./private/db_close.php");
+}
+/**
+ * @param int $id id пользователя
+ */
+function isAdmin($id = 1)
+{
+    $link = mysqli_connect("localhost", "root", "Kate_143090", "php1");
+    if (!$link) {
+        return false;
+    }
+    $query = "select status.name as status_name from users
+	            inner join status on status.id = users.status_id
+                where users.id = $id;";
+    $answer = mysqli_fetch_assoc(mysqli_query($link, $query))['status_name'];
+    mysqli_close($link);
+    return $answer == 'admin';
 }

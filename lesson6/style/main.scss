@@ -61,7 +61,6 @@ textarea {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-
     &_item {
         box-sizing: border-box;
         border-radius: 5px;
@@ -75,14 +74,12 @@ textarea {
         transition: color 300ms ease-out,
                     background-color 300ms ease-out,
                     border-color 300ms ease-out;
-
         &_info {
             align-self: stretch;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
-
         &_txt {
             max-width: 300px;
             margin-top: 5px;
@@ -92,17 +89,14 @@ textarea {
             color: rgb(114, 74, 0);
             transition: color 300ms ease-out;
         }
-
         &_title {
             margin: 5px 0;
             font-size: 24px;
         }
-
         &_description {
             font-weight: 500;
             font-size: 14px;
         }
-
         &:hover {
             background-color: rgb(170, 110, 0);
             border-color: rgb(114, 74, 0);
@@ -111,7 +105,6 @@ textarea {
                 color: rgb(255, 216, 142);
             }
         }
-
         &:active {
             background-color: rgb(255, 216, 142);
             border-color: rgb(170, 110, 0);
@@ -139,24 +132,67 @@ textarea {
     display: none;
 }
 .main_product {
+    min-width: 580px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &_wrapper {
+        max-width: 1000px;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
-.product_img {
+.back {
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+.product_wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 100%;
     box-sizing: border-box;
     border-radius: 5px;
     padding: 10px;
     border: 1px solid rgb(170, 110, 0);
     background-color: rgb(255, 216, 142);
-    display: block;
 }
-.product_wrapper {
-    padding-left: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 0 auto;
+.product_img {
+    display: block;
+    width: 100%;
+    transition: filter 300ms ease-out;
+    &:hover {
+        filter: brightness(0.4);
+    }
+    &:active {
+        filter: none;
+    }
+    &_wrapper {
+        display: block;
+        width: 50%;
+    }
+}
+.product_info {
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    max-height: 300px;
+    margin-left: 10px;
+    &_description {
+        margin: 0;
+    }
+    &_wrapper {
+        margin: 5px 0;
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        &_item {
+            margin: 0 10px 0 0;
+        }
+    }
 }
 .add_product {
     margin-top: 15px;

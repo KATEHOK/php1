@@ -3,8 +3,8 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-$isAdmin = true; // пока что по умолчанию
-if (!$isAdmin) {
+require_once('./private/functions.php');
+if (!isAdmin()) {
     header('Location: ./client.php');
     die;
 }
@@ -24,8 +24,7 @@ if (!$isAdmin) {
 <body>
     <main class="main">
         <?php
-        require_once("./private/functions.php");
-        renderCatalog($isAdmin);
+        renderCatalog(true);
         ?>
         <form action='./private/add_product.php' method='post'>
             <input type='hidden' name='user_id' value='1'>

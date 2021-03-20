@@ -1,6 +1,6 @@
 <?php
-$isAdmin = true; // пока что по умолчанию
-if ($isAdmin) {
+require_once('./private/functions.php');
+if (isAdmin()) {
     header("Location: ./admin.php");
     die;
 }

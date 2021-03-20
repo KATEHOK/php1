@@ -3,7 +3,7 @@
 
 
 <head>
-    <script defer src="js/main.js"></script>
+    <!-- <script defer src="js/main.js"></script> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,27 @@
 
 <body>
     <main class='main_product'>
-        <div class='product_wrapper'>
-            <a href='/' class='btn'>На главную</a>
-            <a href='img/123.png' target='_blank'><img src='img/123.png' class='product_img' alt='photo'></a>
+        <div class="main_product_wrapper">
+            <a href='/' class='btn back'>На главную</a>
+            <div class='product_wrapper'>
+                <a href='img/123.png' class='product_img_wrapper' target='_blank'><img src='img/123.png'
+                        class='product_img' alt='photo'></a>
+                <div class="product_info catalog_item_info">
+                    <span class="catalog_item_txt catalog_item_title">Laptop (64)</span>
+                    <p class="catalog_item_txt catalog_item_description product_info_description">Lorem ipsum dolor sit,
+                        amet consectetur
+                        adipisicing elit. Maiores
+                        ducimus facilis beatae quis sed dolor corrupti. Vitae magnam labore reiciendis eum est ducimus
+                        iusto unde laboriosam, ipsam incidunt et accusantium?</p>
+                    <div class="product_info_wrapper">
+                        <span class="catalog_item_txt product_info_wrapper_item">Price: 1500.00</span>
+                        <span class="catalog_item_txt product_info_wrapper_item">Count: 64</span>
+                        <span class="catalog_item_txt product_info_wrapper_item">Views: 534</span>
+                    </div>
+                    <button class="btn">Buy</button>
+                </div>
+            </div>
         </div>
-
     </main>
 
     <!-- <main class="main">
@@ -72,8 +88,9 @@
         </form>
         <form action='./private/add_product.php' method='post'>
             <input type='hidden' name='user_id' value='1'>
-            <input type='submit' value='Добавить новый товар'>
+            <input type='submit' value='Добавить новый товар' class='btn'>
         </form>
+        <a href="./client.php">Клиентская</a>
     </main> -->
 </body>
 
