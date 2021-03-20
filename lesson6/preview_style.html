@@ -20,7 +20,7 @@
                 <a href='img/123.png' class='product_img_wrapper' target='_blank'><img src='img/123.png'
                         class='product_img' alt='photo'></a>
                 <div class="product_info catalog_item_info">
-                    <span class="catalog_item_txt catalog_item_title">Laptop (64)</span>
+                    <span class="catalog_item_txt catalog_item_title">Laptop</span>
                     <p class="catalog_item_txt catalog_item_description product_info_description">Lorem ipsum dolor sit,
                         amet consectetur
                         adipisicing elit. Maiores
@@ -31,7 +31,16 @@
                         <span class="catalog_item_txt product_info_wrapper_item">Count: 64</span>
                         <span class="catalog_item_txt product_info_wrapper_item">Views: 534</span>
                     </div>
-                    <button class="btn">Buy</button>
+                    <div class="admin_controls">
+                        <form action='#' method="post">
+                            <input type="hidden" name="id" value='id'>
+                            <input type="submit" value="Редактировать" class="btn">
+                        </form>
+                        <form action='#' method="post">
+                            <input type="hidden" name="id" value='id'>
+                            <input type="submit" value="Удалить" class="btn">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ $idProduct = $_POST['id'];
 include("./db_open.php");
 $updateView = mysqli_query($link, "update catalog set `view` = `view` + 1 where id = '$idProduct';");
 $productObj = mysqli_fetch_assoc(mysqli_query($link, "select name, img, description, view, count, price from catalog where id = '$idProduct';"));
+include('./db_close.php');
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +40,17 @@ $productObj = mysqli_fetch_assoc(mysqli_query($link, "select name, img, descript
                         <span class='catalog_item_txt product_info_wrapper_item'>Price: <?= $productObj['price'] ?></span>
                         <span class='catalog_item_txt product_info_wrapper_item'>Count: <?= $productObj['count'] ?></span>
                         <span class='catalog_item_txt product_info_wrapper_item'>Views: <?= $productObj['view'] ?></span>
-                        <?php
-                        include('./db_close.php');
-                        ?>
                     </div>
-                    <button class="btn">Buy</button>
+                    <div class="admin_controls">
+                        <form action='#' method="post">
+                            <input type="hidden" name="id" value='<?= $idProduct ?>'>
+                            <input type="submit" value="Редактировать" class="btn">
+                        </form>
+                        <form action='./delete.php' method="post">
+                            <input type="hidden" name="id" value='<?= $idProduct ?>'>
+                            <input type="submit" value="Удалить" class="btn">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

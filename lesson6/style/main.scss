@@ -194,6 +194,11 @@ textarea {
         }
     }
 }
+.admin_controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
 .add_product {
     margin-top: 15px;
     padding: 15px;
