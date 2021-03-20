@@ -13,8 +13,11 @@
  * @param str $descriptionClass класс описания
  * @param str $alt текст alt-атрибута изображения
  */
-function renderCatalog($isAdmin, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
+function renderCatalog($isAdmin = false, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
+    if ($isAdmin) {
+        $productLink = './private/product_admin.php';
+    }
     include("./private/db_open.php");
     echo "<form action='$productLink' method='post' class='$wrapperClass'>";
     $query = mysqli_query($link, "select id, `name`, img, view, count, price, description from catalog order by view desc;");

@@ -12,16 +12,16 @@ ini_set('display_startup_errors', '1');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full image</title>
+    <title>MyShop</title>
     <link rel="stylesheet" href="../style/main.css">
 </head>
 
 <body>
     <main class="main_product">
         <div class="product_wrapper">
-            <a href="/" class="back">На главную</a>
+            <a href="../client.php" class="btn">На главную</a>
             <?php
-            echo "<img src='../img/{$_POST['link']}' class='product_img' alt='photo'>";
+            echo "<a href='../img/{$_POST['link']}' target='_blank'><img src='../img/{$_POST['link']}' class='product_img' alt='photo'></a>";
             include("./db_open.php");
             $query = mysqli_query($link, "update catalog set `view` = `view` + 1 where `img` = '{$_POST['link']}'");
             include('./db_close.php');

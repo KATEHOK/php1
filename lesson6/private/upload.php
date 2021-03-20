@@ -1,5 +1,11 @@
 <?php
-header("Location: ../");
+$isAdmin = true; // Пока что по умолчанию
+if (!$isAdmin) {
+    header('Location: ../client.php');
+    die;
+} else {
+    header("Location: ../admin.php");
+}
 const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
