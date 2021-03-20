@@ -8,6 +8,15 @@ if (!isAdmin()) {
     header('Location: ../client.php');
     die;
 }
+$idProduct = $_POST['id'];
+include('./db_open.php');
+$query = "select name, price, count, img, description from catalog where id = '$idProduct';";
+$data = mysqli_fetch_assoc(mysqli_query($link, $query));
+include('./db_close.php');
+if (empty($data)) {
+    header('../admin.php');
+    die;
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,22 +34,22 @@ if (!isAdmin()) {
 <body>
     <main class="main">
         <a href="../" class="btn">На главную</a>
-        <form method="post" enctype="multipart/form-data" class="add_product catalog" action="./upload.php">
+        <form method="post" enctype="multipart/form-data" class="add_product catalog" action="./edit.php">
             <fieldset class="add_product_wrapper">
                 <label class="label add_product_item">
                     <span class="label_span">Название товара</span>
-                    <input type="text" name="name" placeholder="Картофан" class="input add_product_input">
+                    <input type="text" name="name" placeholder="Картофан" value="<?= $data['name'] ?>" class="input add_product_input">
                 </label>
                 <label class="label add_product_item">
                     <span class="label_span">Цена товара</span>
-                    <input type="text" name="price" class="add_product_input" placeholder="10000">
+                    <input type="text" name="price" value="<?= $data['price'] ?>" class="add_product_input" placeholder="10000">
                 </label>
                 <label class="label add_product_item">
                     <span class="label_span">Количество товара</span>
-                    <input type="text" name="count" class="add_product_input" placeholder="30">
+                    <input type="text" name="count" value="<?= $data['count'] ?>" class="add_product_input" placeholder="30">
                 </label>
                 <label class="label add_product_img add_product_item">
-                    <span id="selected-file" class="label_span add_product_input_file_name">Файл не выбран</span>
+                    <span id="selected-file" class="label_span add_product_input_file_name"><?= $data['img'] ?></span>
                     <span class="btn add_product_input_file_btn" id='select-img-btn'>Выбрать изображение</span>
                     <input id="input-file" type="file" name="img" class="add_product_input_file" class="input_file">
                 </label>
@@ -48,9 +57,10 @@ if (!isAdmin()) {
             </fieldset>
             <label class="label">
                 <span class="label_span">Описание товара</span>
-                <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..."></textarea>
+                <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..."><?= $data['description'] ?></textarea>
             </label>
             <input type="hidden" name="user_id" value="<?= $_POST['user_id'] ?>">
+            <input type="hidden" name="product_id" value="<?= $idProduct ?>">
         </form>
     </main>
 

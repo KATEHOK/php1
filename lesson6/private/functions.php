@@ -2,6 +2,7 @@
 
 /**
  * функция генерирует рзметку для каталога
+ * @param int $userId id пользователя
  * @param str $productLink путь до страницы продукта
  * @param str $wrapperClass класс обёртки
  * @param str $itemClass класс лэйблов элементов
@@ -13,7 +14,7 @@
  * @param str $descriptionClass класс описания
  * @param str $alt текст alt-атрибута изображения
  */
-function renderCatalog($isAdmin = false, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
+function renderCatalog($isAdmin = false, $userId = 1, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
     // if (isAdmin()) { 
     if ($isAdmin) {
@@ -26,7 +27,7 @@ function renderCatalog($isAdmin = false, $productLink = './private/product.php',
     while ($row = mysqli_fetch_assoc($query)) {
         echo "        
         <label class='$itemClass'>
-            <!-- <input type='hidden' value='{$row['id']}' name='id'> -->
+            <input type='hidden' value='{$userId}' name='user_id'>
             <input type='submit' value='{$row['id']}' name='id' class='hide'>
             <p class='$txtClass $titleClass'>{$row['name']}</p>
             <img src='../img/{$row['img']}' alt='$alt' class='$imgClass'>
