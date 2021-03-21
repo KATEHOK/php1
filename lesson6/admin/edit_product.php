@@ -3,16 +3,23 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
+// проверяем статус пользователя (подробнее в admin/index.php)
 require_once('../private/functions.php');
 if (!isAdmin()) {
     header('Location: ../client');
     die;
 }
+// принимаем id продукта
 $idProduct = $_POST['id'];
+// подключаемся к бд
 include('../private/db_open.php');
+// запрос на получения данных о продукте по его id
 $query = "select name, price, count, img, description from catalog where id = '$idProduct';";
+// выполняем запрос, приводим результат к массиву
 $data = mysqli_fetch_assoc(mysqli_query($link, $query));
+// отключаемся от бд
 include('../private/db_close.php');
+// если данные не получены, завершаем скрипт, не выводя информацию
 if (empty($data)) {
     header('./');
     die;

@@ -16,17 +16,24 @@
  */
 function renderCatalog($isAdmin = false, $userId = 1, $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
+    // пока что статус пользователя берем из переменной, а не из функции,
+    // потому что иначе на клиентских версиях страниц
+    // будет происходить принудительная переадрессация на админку
     // if (isAdmin()) { 
     if ($isAdmin) {
+        // если пользователь - админ, то путь к файлу-оьработчику меняем 
         $productLink = './product_admin.php';
     }
-    $link = mysqli_connect("localhost", "root", "Kate_143090", "php1");
-    if (!$link) {
-        die(mysqli_connect_error($link));
-    }
-    echo "<form action='$productLink' method='post' class='$wrapperClass'>";
-    $query = mysqli_query($link, "select id, `name`, img, view, count, price, description from catalog order by view desc;");
+    // если пользователь - не админ, то путь к файлу-обработчику берем из соответствующего аргумента функции
+    // пути к файлам с открытием и закрытием бд идентичны для обеих версий страницы, поэтому просто импортируем их
+    include('../private/db_open.php');
+    // выполняем запрос к бд для получения информации о продуктах каталога
+    $query = mysqli_query($link, "select id, name, img, view, count, price, description from catalog order by view desc;");
+    // всопомогательная переменная (если в каталоге не окажется товаров, то мы выведем соответствующее сообщение)
     $isEmpty = true;
+    // выводим открывающий тэг формы (класс и ссылку на файл-обработчик берем из аргументов функции)
+    echo "<form action='$productLink' method='post' class='$wrapperClass'>";
+    // запускаем цикл: пока мы принимаем объект, выводим товар на страницу
     while ($row = mysqli_fetch_assoc($query)) {
         echo "        
         <label class='$itemClass'>
@@ -41,31 +48,46 @@ function renderCatalog($isAdmin = false, $userId = 1, $productLink = './product.
             </div>
             <p class='$txtClass $descriptionClass'>{$row['description']}</p>
         </label>";
+        // если хоть один раз выполнилось тело цикла, меняем значение вспомогательной переменной
         $isEmpty = false;
     }
     if (!$link) {
+        // если не произошло соединения с бд, выводим соответствующее сообщение
         echo "<span class='$emptyClass'>Не удалось подключиться к базе данных:(</span>";
     } elseif ($isEmpty) {
+        // если каталог не содержит товаров, выводим соответствующее сообщение
         echo "<span class='$emptyClass'>В каталоге нет товаров:(</span>";
     }
+    // закрываем тэг формы
     echo '</form>';
-    if ($link) {
-        mysqli_close($link);
-    }
+    // закрываем соединение с бд
+    include('../private/db_close.php');
 }
 /**
- * @param int $id id пользователя
+ * функция проверяет, является ли пользователь админом
+ * @param int $id id пользователя (сейчас по умолчанию 1)
+ * (в моей бд пользователь с индексом 1 является админом)
+ * (в следующей работе буду получать индекс из сессии)
  */
 function isAdmin($id = 1)
 {
+    // устонавливаю соединение с бд вручную,
+    // потому что функция будет использоваться в файлах,
+    // в которых путь относительно bd_open.php будет разным
+    // (по этой же причине ниже вручную отключаюсь от бд)
     $link = mysqli_connect("localhost", "root", "Kate_143090", "php1");
     if (!$link) {
         return false;
     }
+    // соединяю две таблицы из бд: таблицу пользователей и таблицу статусов
+    // (статусы вынес в отдельную таблицу, чтобы в будущем иметь возможность изменять их)
+    // выбираю из соединённых таблиц имя статуса строчки с id, который передавался в качестве параметра
     $query = "select status.name as status_name from users
 	            inner join status on status.id = users.status_id
                 where users.id = $id;";
+    // выполняю запрос, результат привожу к массиву, выбираю интересующий меня элемент
     $answer = mysqli_fetch_assoc(mysqli_query($link, $query))['status_name'];
     mysqli_close($link);
+    // возвращаю true, если имя статуса совпадает с нужным (admin)
     return $answer == 'admin';
 }

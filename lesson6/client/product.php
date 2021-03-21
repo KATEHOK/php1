@@ -5,9 +5,19 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
 $idProduct = $_POST['id'];
+// соединяемся с бд
 include("../private/db_open.php");
+// обновляем поле количества просмотров в бд
 $updateView = mysqli_query($link, "update catalog set `view` = `view` + 1 where id = '$idProduct';");
-$productObj = mysqli_fetch_assoc(mysqli_query($link, "select name, img, description, view, count, price from catalog where id = '$idProduct';"));
+// выполняем запрос к бд, получаем данные продукта по id, приводим к массиву, записываем его в переменную
+$productObj = mysqli_query($link, "select name, img, description, view, count, price from catalog where id = '$idProduct';");
+// если запрос не был выполнен, завершаем скрипт
+if (!$productObj) {
+    header('Location: ./');
+    die;
+}
+$productObj = mysqli_fetch_assoc($productObj);
+// закрываем бд
 include('../private/db_close.php');
 ?>
 

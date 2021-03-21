@@ -19,9 +19,11 @@ ini_set('display_startup_errors', '1');
 <body>
     <main class="main">
         <?php
+        // подключаем файл с функциями и вызывем рендер-функцию (без параметра, потому что по умолчанию он false)
         require_once("../private/functions.php");
         renderCatalog();
         ?>
+        <!-- кнопка смены версии Клиентская => Админка -->
         <a href="../admin">Админка</a>
     </main>
 

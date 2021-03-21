@@ -3,9 +3,11 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
+// подключаем файл с функциями и выполняем проверку на статус
 require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client/client.php');
+    // не админ - будь добр, перейди на клиентскую версию
+    header('Location: ../client');
     die;
 }
 ?>
@@ -24,12 +26,15 @@ if (!isAdmin()) {
 <body>
     <main class="main">
         <?php
+        // вызываем рендер-функцию (параметр true - временный, потом буду получать инфу из сессии)
         renderCatalog(true);
         ?>
+        <!-- тк это админка, добавляем кнопку добавления товара -->
         <form action='./add_product.php' method='post'>
             <input type='hidden' name='user_id' value='1'>
             <input type='submit' value='Добавить новый товар' class='btn'>
         </form>
+        <!-- кнопка смены версии Админка => Клиентская -->
         <a href="../client">Клиентская</a>
     </main>
 
