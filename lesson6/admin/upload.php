@@ -1,10 +1,10 @@
 <?php
 require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client/client.php');
+    header('Location: ../client');
     die;
 }
-header("Location: ./admin.php");
+header('Location: ./');
 
 const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);

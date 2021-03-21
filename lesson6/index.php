@@ -1,7 +1,7 @@
 <?php
 require_once('./private/functions.php');
 if (isAdmin()) {
-    header("Location: ./admin/admin.php");
+    header("Location: ./admin");
     die;
 }
-header('Location: ./client/client.php');
+header('Location: ./client');

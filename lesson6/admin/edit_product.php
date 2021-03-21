@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client/client.php');
+    header('Location: ../client');
     die;
 }
 $idProduct = $_POST['id'];
@@ -14,7 +14,7 @@ $query = "select name, price, count, img, description from catalog where id = '$
 $data = mysqli_fetch_assoc(mysqli_query($link, $query));
 include('../private/db_close.php');
 if (empty($data)) {
-    header('./admin.php');
+    header('./');
     die;
 }
 ?>
@@ -33,7 +33,7 @@ if (empty($data)) {
 
 <body>
     <main class="main">
-        <a href="../" class="btn">На главную</a>
+        <a href="./" class="btn">На главную</a>
         <form method="post" enctype="multipart/form-data" class="add_product catalog" action="./edit.php">
             <fieldset class="add_product_wrapper">
                 <label class="label add_product_item">

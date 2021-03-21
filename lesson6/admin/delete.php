@@ -5,10 +5,10 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client/client.php');
+    header('Location: ../client');
     die;
 }
-header('Location: ./admin.php');
+header('Location: ./');
 include('../private/db_open.php');
 // запоминаем имя картинки, получая его из бд по id
 $imgName = mysqli_fetch_assoc(mysqli_query($link, "select img from catalog where id = {$_POST['id']};"))['img'];

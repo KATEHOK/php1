@@ -22,7 +22,7 @@ ini_set('display_startup_errors', '1');
         require_once("../private/functions.php");
         renderCatalog();
         ?>
-        <a href="../admin/admin.php">Админка</a>
+        <a href="../admin">Админка</a>
     </main>
 
 </body>

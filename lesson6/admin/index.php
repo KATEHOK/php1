@@ -30,7 +30,7 @@ if (!isAdmin()) {
             <input type='hidden' name='user_id' value='1'>
             <input type='submit' value='Добавить новый товар' class='btn'>
         </form>
-        <a href="../client/client.php">Клиентская</a>
+        <a href="../client">Клиентская</a>
     </main>
 
 </body>

@@ -25,7 +25,7 @@ include('../private/db_close.php');
 <body>
     <main class='main_product'>
         <div class='main_product_wrapper'>
-            <a href='../client/client.php' class='btn back'>На главную</a>
+            <a href='./' class='btn back'>На главную</a>
             <div class='product_wrapper'>
                 <a href='../img/<?= $productObj['img'] ?>' class='product_img_wrapper' target='_blank'><img src='../img/<?= $productObj['img'] ?>' class='product_img' alt='photo'></a>
                 <div class='product_info catalog_item_info'>
