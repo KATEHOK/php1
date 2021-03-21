@@ -16,9 +16,9 @@ include("../private/db_open.php");
 // Для наглядности создаю переменные, применяя функции защиты и удаления пробельных символов
 $prodactName = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags($_POST['name']))));
 $description = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags($_POST['description']))));
-$productPrice = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags($_POST['price']))));
-$productCount = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags($_POST['count']))));
-$userId = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags($_POST['user_id']))));
+$productPrice = (float)($_POST['price']);
+$productCount = (int)($_POST['count']);
+$userId = (int)($_POST['user_id']);
 $imgName = $_FILES['img']['name'];
 $imgTmpName = $_FILES['img']['tmp_name'];
 // Проверяю, не пусты ли эти переменные
