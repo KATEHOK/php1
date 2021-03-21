@@ -3,19 +3,19 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-require_once('./functions.php');
+require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client.php');
+    header('Location: ../client/client.php');
     die;
 }
-header('Location: ../admin.php');
+header('Location: ./admin.php');
 $productName = $_POST['name'];
 $productId = $_POST['product_id'];
 $price = $_POST['price'];
 $count = $_POST['count'];
 $description = $_POST['description'];
 $userId = $_POST['user_id'];
-include('./db_open.php');
+include('../private/db_open.php');
 $imgName = mysqli_fetch_assoc(mysqli_query($link, "select img from catalog where id = '$productId';"))['img'];
 $query = "update catalog
 set
@@ -42,4 +42,4 @@ if ($result && $imgCountChecker) {
 if ($haveImg) {
     move_uploaded_file($imgTmpName, "../img/$newImgName");
 }
-include('./db_close.php');
+include('../private/db_close.php');

@@ -4,16 +4,16 @@ ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
-require_once('./functions.php');
+require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client.php');
+    header('Location: ../client/client.php');
     die;
 }
 $userId = $_POST['user_id'];
 $idProduct = $_POST['id'];
-include("./db_open.php");
+include("../private/db_open.php");
 $productObj = mysqli_fetch_assoc(mysqli_query($link, "select name, img, description, view, count, price from catalog where id = '$idProduct';"));
-include('./db_close.php');
+include('../private/db_close.php');
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ include('./db_close.php');
 <body>
     <main class='main_product'>
         <div class='main_product_wrapper'>
-            <a href='../admin.php' class='btn back'>На главную</a>
+            <a href='./admin.php' class='btn back'>На главную</a>
             <div class='product_wrapper'>
                 <a href='../img/<?= $productObj['img'] ?>' class='product_img_wrapper' target='_blank'><img src='../img/<?= $productObj['img'] ?>' class='product_img' alt='photo'></a>
                 <div class='product_info catalog_item_info'>

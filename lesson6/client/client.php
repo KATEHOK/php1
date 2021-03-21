@@ -13,16 +13,16 @@ ini_set('display_startup_errors', '1');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyShop</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 
 <body>
     <main class="main">
         <?php
-        require_once("./private/functions.php");
+        require_once("../private/functions.php");
         renderCatalog();
         ?>
-        <a href="./index.php">Админка</a>
+        <a href="../admin/admin.php">Админка</a>
     </main>
 
 </body>

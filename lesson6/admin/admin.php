@@ -3,9 +3,9 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-require_once('./private/functions.php');
+require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ./client.php');
+    header('Location: ../client/client.php');
     die;
 }
 ?>
@@ -18,7 +18,7 @@ if (!isAdmin()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyShop (admin)</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 
 <body>
@@ -26,11 +26,11 @@ if (!isAdmin()) {
         <?php
         renderCatalog(true);
         ?>
-        <form action='./private/add_product.php' method='post'>
+        <form action='./add_product.php' method='post'>
             <input type='hidden' name='user_id' value='1'>
             <input type='submit' value='Добавить новый товар' class='btn'>
         </form>
-        <a href="./client.php">Клиентская</a>
+        <a href="../client/client.php">Клиентская</a>
     </main>
 
 </body>

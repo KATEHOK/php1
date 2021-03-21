@@ -14,13 +14,16 @@
  * @param str $descriptionClass класс описания
  * @param str $alt текст alt-атрибута изображения
  */
-function renderCatalog($isAdmin = false, $userId = 1, $productLink = './private/product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
+function renderCatalog($isAdmin = false, $userId = 1, $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
     // if (isAdmin()) { 
     if ($isAdmin) {
-        $productLink = './private/product_admin.php';
+        $productLink = './product_admin.php';
     }
-    include("./private/db_open.php");
+    $link = mysqli_connect("localhost", "root", "Kate_143090", "php1");
+    if (!$link) {
+        die(mysqli_connect_error($link));
+    }
     echo "<form action='$productLink' method='post' class='$wrapperClass'>";
     $query = mysqli_query($link, "select id, `name`, img, view, count, price, description from catalog order by view desc;");
     $isEmpty = true;
@@ -46,7 +49,9 @@ function renderCatalog($isAdmin = false, $userId = 1, $productLink = './private/
         echo "<span class='$emptyClass'>В каталоге нет товаров:(</span>";
     }
     echo '</form>';
-    include("./private/db_close.php");
+    if ($link) {
+        mysqli_close($link);
+    }
 }
 /**
  * @param int $id id пользователя

@@ -1,11 +1,11 @@
 <?php
-require_once('./functions.php');
+require_once('../private/functions.php');
 if (!isAdmin()) {
-    header('Location: ../client.php');
+    header('Location: ../client/client.php');
     die;
-} else {
-    header("Location: ../admin.php");
 }
+header("Location: ./admin.php");
+
 const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
@@ -28,7 +28,7 @@ if (empty($_FILES['img']) || !isset($prodactName) || !isset($description) || !is
 // Для наглядности запсос к БД тоже делаю переменной
 $query = "insert into catalog (`name`, price, count, img, creator_id, description) values ('$prodactName', $productPrice, $productCount, '$imgName', $userId, '$description');";
 // Импортирую файл, подключающий БД
-include("./db_open.php");
+include("../private/db_open.php");
 // Выполняю запрос к БД
 $result = mysqli_query($link, $query);
 // Выключаем выполнение скрипта, если не удалось записать данные в БД (например, в моей БД настроена уникальность имен товаров)
@@ -38,4 +38,4 @@ if (!$result) {
 // Перемещаю картинку в директорию с изображениями
 move_uploaded_file($imgTmpName, "../img/$imgName");
 // Импортирую файл, отключающий от БД
-include("./db_close.php");
+include("../private/db_close.php");

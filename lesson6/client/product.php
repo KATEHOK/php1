@@ -5,10 +5,10 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
 $idProduct = $_POST['id'];
-include("./db_open.php");
+include("../private/db_open.php");
 $updateView = mysqli_query($link, "update catalog set `view` = `view` + 1 where id = '$idProduct';");
 $productObj = mysqli_fetch_assoc(mysqli_query($link, "select name, img, description, view, count, price from catalog where id = '$idProduct';"));
-include('./db_close.php');
+include('../private/db_close.php');
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ include('./db_close.php');
 <body>
     <main class='main_product'>
         <div class='main_product_wrapper'>
-            <a href='../client.php' class='btn back'>На главную</a>
+            <a href='../client/client.php' class='btn back'>На главную</a>
             <div class='product_wrapper'>
                 <a href='../img/<?= $productObj['img'] ?>' class='product_img_wrapper' target='_blank'><img src='../img/<?= $productObj['img'] ?>' class='product_img' alt='photo'></a>
                 <div class='product_info catalog_item_info'>
