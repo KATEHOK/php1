@@ -4,8 +4,15 @@ ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 require_once('../private/functions.php');
-// выполняем проверку статуса (подробней в admin/index.php)
-if (!isAdmin()) {
+session_start();
+// подключаем файл с функциями и выполняем проверку на статус
+require_once('../private/functions.php');
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../');
+    die;
+}
+if (!isAdmin($_SESSION['user_id'])) {
+    // не админ - будь добр, перейди на клиентскую версию
     header('Location: ../client');
     die;
 }
@@ -18,7 +25,7 @@ $productId = (int)($_POST['product_id']);
 $price = (float)($_POST['price']);
 $count = (int)($_POST['count']);
 $description = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['description']))));
-$userId = (int)($_POST['user_id']);
+$userId = $_SESSION['user_id'];
 $imgName = mysqli_fetch_assoc(mysqli_query($link, "select img from catalog where id = '$productId';"))['img'];
 // если хоть какое-то поле не было заполнено, завершаем скрипт
 if (!$productName || !$productId || !$price || !$count || !$description || !$userId || !$imgName) {

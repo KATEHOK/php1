@@ -3,9 +3,15 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-// подключаем файл, выполняем проверку (подробнее в admin/index.php)
+session_start();
+// подключаем файл с функциями и выполняем проверку на статус
 require_once('../private/functions.php');
-if (!isAdmin()) {
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../');
+    die;
+}
+if (!isAdmin($_SESSION['user_id'])) {
+    // не админ - будь добр, перейди на клиентскую версию
     header('Location: ../client');
     die;
 }
@@ -18,7 +24,7 @@ $prodactName = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags
 $description = trim(mysqli_real_escape_string($link, htmlspecialchars(strip_tags($_POST['description']))));
 $productPrice = (float)($_POST['price']);
 $productCount = (int)($_POST['count']);
-$userId = (int)($_POST['user_id']);
+$userId = $_SESSION['user_id'];
 $imgName = $_FILES['img']['name'];
 $imgTmpName = $_FILES['img']['tmp_name'];
 // Проверяю, не пусты ли эти переменные

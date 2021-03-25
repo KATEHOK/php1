@@ -8,6 +8,7 @@ textarea {
     outline: none;
 }
 .main {
+    width: 100%;
     margin: 0 auto;
     max-width: 1200px;
     height: 100vh;
@@ -26,6 +27,7 @@ textarea {
     }
 }
 .btn {
+    text-align: center;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -53,7 +55,7 @@ textarea {
 .catalog {
     box-sizing: border-box;
     width: 90%;
-    margin: 30px 0 10px;
+    margin: 10px 0;
     border: 1px solid rgb(207, 141, 19);
     background-color: rgb(255, 201, 100);
     border-radius: 10px;
@@ -244,6 +246,26 @@ textarea {
     }
 
     &_submit {
+        margin: 0;
+    }
+}
+.signin_form {
+    min-width: 600px;
+    margin-top: 30px;
+    width: 80%;
+    // align-items: center;
+    padding: 20px;
+}
+.register_fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+.register_item {
+    margin-bottom: 10px;
+    &:last-child {
         margin: 0;
     }
 }

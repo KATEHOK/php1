@@ -3,15 +3,20 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-// проверяю статус пользователя (подробнее в admin/index.php)
+session_start();
+// подключаем файл с функциями и выполняем проверку на статус
 require_once('../private/functions.php');
-if (!isAdmin()) {
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../');
+    die;
+}
+if (!isAdmin($_SESSION['user_id'])) {
+    // не админ - будь добр, перейди на клиентскую версию
     header('Location: ../client');
     die;
 }
 // переменные для удобства
-$userId = $_POST['user_id'];
-$idProduct = $_POST['id'];
+$idProduct = $_GET['id'];
 // соединяемся с бд
 include("../private/db_open.php");
 // получаем данные из бд, преобразуем результат в объект

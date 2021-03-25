@@ -3,9 +3,15 @@ const strict_types = 1;
 ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-// проверяем статус пользователя (подробнее в admin/index.php)
+session_start();
+// подключаем файл с функциями и выполняем проверку на статус
 require_once('../private/functions.php');
-if (!isAdmin()) {
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../');
+    die;
+}
+if (!isAdmin($_SESSION['user_id'])) {
+    // не админ - будь добр, перейди на клиентскую версию
     header('Location: ../client');
     die;
 }
@@ -51,7 +57,6 @@ if (!isAdmin()) {
                 <span class="label_span">Описание товара</span>
                 <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..."></textarea>
             </label>
-            <input type="hidden" name="user_id" value="<?= $_POST['user_id'] ?>">
         </form>
     </main>
 
