@@ -2,6 +2,7 @@
 
 /**
  * функция генерирует рзметку для каталога
+ * @param str $method метод отправки данных
  * @param str $productLink путь до страницы продукта
  * @param str $wrapperClass класс обёртки
  * @param str $itemClass класс лэйблов элементов
@@ -15,6 +16,10 @@
  */
 function renderCatalog($method = 'get', $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
+    // учел Ваш комментарий к дз 5 урока - изменил метод передачи данных
+    // из других изменений - сделал путь к файлу-обработчику идентичным для обеих версий сайта,
+    // поэтому теперь не проверяю статус пользователя;
+    // добавил кнопку выхода с учётки
     echo "<a class='btn' href='../private/signout.php'>Sign out</a>";
     // пути к файлам с открытием и закрытием бд идентичны для обеих версий страницы, поэтому просто импортируем их
     include('../private/db_open.php');

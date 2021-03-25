@@ -6,6 +6,7 @@ ini_set('display_startup_errors', '1');
 session_start();
 // подключаем файл с функциями и выполняем проверку на статус
 require_once('../private/functions.php');
+// неавторизованных пользователей перенаправляем на авторизацию
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../');
     die;
@@ -31,10 +32,7 @@ if (!isAdmin($_SESSION['user_id'])) {
 <body>
     <main class="main">
         <?php
-        // echo password_hash('noname', PASSWORD_BCRYPT);
-        // echo '   ';
-        // var_dump(password_verify('noname', ''));
-        // вызываем рендер-функцию (параметр true - временный, потом буду получать инфу из сессии)
+        // вызываем рендер-функцию (без параметров, потому что все нужные параметры установлены по умолчанию)
         renderCatalog();
         ?>
         <!-- тк это админка, добавляем кнопку добавления товара -->

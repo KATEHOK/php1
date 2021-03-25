@@ -7,6 +7,7 @@ require_once('../private/functions.php');
 session_start();
 // подключаем файл с функциями и выполняем проверку на статус
 require_once('../private/functions.php');
+// неавторизованных пользователей перенаправляем на индекс-файл сайта
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../');
     die;
