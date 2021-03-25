@@ -4,7 +4,7 @@ ini_set('error_reporting', (string)E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
-$idProduct = $_POST['id'];
+$idProduct = $_GET['id'];
 // соединяемся с бд
 include("../private/db_open.php");
 // обновляем поле количества просмотров в бд

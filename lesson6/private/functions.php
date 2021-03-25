@@ -14,7 +14,7 @@
  * @param str $descriptionClass класс описания
  * @param str $alt текст alt-атрибута изображения
  */
-function renderCatalog($isAdmin = false, $userId = 1, $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
+function renderCatalog($isAdmin = false, $userId = 1, $method = 'get', $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
     // пока что статус пользователя берем из переменной, а не из функции,
     // потому что иначе на клиентских версиях страниц
@@ -23,6 +23,7 @@ function renderCatalog($isAdmin = false, $userId = 1, $productLink = './product.
     if ($isAdmin) {
         // если пользователь - админ, то путь к файлу-оьработчику меняем 
         $productLink = './product_admin.php';
+        $method = 'post';
     }
     // если пользователь - не админ, то путь к файлу-обработчику берем из соответствующего аргумента функции
     // пути к файлам с открытием и закрытием бд идентичны для обеих версий страницы, поэтому просто импортируем их
@@ -32,13 +33,15 @@ function renderCatalog($isAdmin = false, $userId = 1, $productLink = './product.
     // всопомогательная переменная (если в каталоге не окажется товаров, то мы выведем соответствующее сообщение)
     $isEmpty = true;
     // выводим открывающий тэг формы (класс и ссылку на файл-обработчик берем из аргументов функции)
-    echo "<form action='$productLink' method='post' class='$wrapperClass'>";
+    echo "<form action='$productLink' method='$method' class='$wrapperClass'>";
     // запускаем цикл: пока мы принимаем объект, выводим товар на страницу
     while ($row = mysqli_fetch_assoc($query)) {
         echo "        
-        <label class='$itemClass'>
-            <input type='hidden' value='{$userId}' name='user_id'>
-            <input type='submit' value='{$row['id']}' name='id' class='hide'>
+        <label class='$itemClass'>";
+        if ($isAdmin) {
+            echo "<input type='hidden' value='{$userId}' name='user_id'>";
+        }
+        echo "<input type='submit' value='{$row['id']}' name='id' class='hide'>
             <p class='$txtClass $titleClass'>{$row['name']}</p>
             <img src='../img/{$row['img']}' alt='$alt' class='$imgClass'>
             <div class='$infoClass'>
