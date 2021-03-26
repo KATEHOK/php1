@@ -43,7 +43,7 @@ include('../private/db_close.php');
             <a href='./' class='btn back'>На главную</a>
             <div class='product_wrapper'>
                 <a href='../img/<?= $productObj['img'] ?>' class='product_img_wrapper' target='_blank'><img src='../img/<?= $productObj['img'] ?>' class='product_img' alt='photo'></a>
-                <div class='product_info catalog_item_info'>
+                <form class='product_info catalog_item_info' method="get" action="./add_to_cart.php">
                     <span class='catalog_item_txt catalog_item_title'><?= $productObj['name'] ?></span>
                     <p class='catalog_item_txt catalog_item_description product_info_description'><?= $productObj['description'] ?></p>
                     <div class='product_info_wrapper'>
@@ -51,8 +51,9 @@ include('../private/db_close.php');
                         <span class='catalog_item_txt product_info_wrapper_item'>Count: <?= $productObj['count'] ?></span>
                         <span class='catalog_item_txt product_info_wrapper_item'>Views: <?= $productObj['view'] ?></span>
                     </div>
-                    <button class="btn">Buy</button>
-                </div>
+                    <input type="hidden" name="product_id" value="<?= $idProduct ?>">
+                    <input type="submit" class="btn" value="Buy">
+                </form>
             </div>
         </div>
     </main>
