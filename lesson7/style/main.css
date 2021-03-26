@@ -398,4 +398,15 @@ textarea {
 .register_item:last-child {
   margin: 0;
 }
+
+.btn_wrapper {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
 /*# sourceMappingURL=main.css.map */

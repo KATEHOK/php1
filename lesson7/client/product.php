@@ -40,7 +40,10 @@ include('../private/db_close.php');
 <body>
     <main class='main_product'>
         <div class='main_product_wrapper'>
-            <a href='./' class='btn back'>На главную</a>
+            <div class="btn_wrapper">
+                <a href='./' class='btn back'>Home</a>
+                <a href="./cart.php" class="btn">Cart</a>
+            </div>
             <div class='product_wrapper'>
                 <a href='../img/<?= $productObj['img'] ?>' class='product_img_wrapper' target='_blank'><img src='../img/<?= $productObj['img'] ?>' class='product_img' alt='photo'></a>
                 <form class='product_info catalog_item_info' method="get" action="./add_to_cart.php">
