@@ -14,11 +14,11 @@ header('Location: ./');
 include('../private/db_open.php');
 // для наглядности создаем переменные, применяем функции защиты и удаления пробельных символов
 $productName = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['name']))));
-$productId = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['product_id']))));
-$price = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['price']))));
-$count = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['count']))));
+$productId = (int)($_POST['product_id']);
+$price = (float)($_POST['price']);
+$count = (int)($_POST['count']);
 $description = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['description']))));
-$userId = mysqli_real_escape_string($link, htmlspecialchars(strip_tags(trim($_POST['user_id']))));
+$userId = (int)($_POST['user_id']);
 $imgName = mysqli_fetch_assoc(mysqli_query($link, "select img from catalog where id = '$productId';"))['img'];
 // если хоть какое-то поле не было заполнено, завершаем скрипт
 if (!$productName || !$productId || !$price || !$count || !$description || !$userId || !$imgName) {
