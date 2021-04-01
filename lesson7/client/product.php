@@ -42,7 +42,7 @@ include('../private/db_close.php');
         <div class='main_product_wrapper'>
             <div class="btn_wrapper">
                 <a href='./' class='btn back'>Home</a>
-                <a href="./cart.php" class="btn">Cart</a>
+                <a href="./cart.php" class="btn back">Cart</a>
             </div>
             <div class='product_wrapper'>
                 <a href='../img/<?= $productObj['img'] ?>' class='product_img_wrapper' target='_blank'><img src='../img/<?= $productObj['img'] ?>' class='product_img' alt='photo'></a>
