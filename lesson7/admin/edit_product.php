@@ -52,15 +52,15 @@ if (empty($data)) {
             <fieldset class="add_product_wrapper">
                 <label class="label add_product_item">
                     <span class="label_span">Название товара</span>
-                    <input type="text" name="name" placeholder="Картофан" value="<?= $data['name'] ?>" class="input add_product_input">
+                    <input type="text" name="name" placeholder="Картофан" value="<?= $data['name'] ?>" class="input add_product_input" required>
                 </label>
                 <label class="label add_product_item">
                     <span class="label_span">Цена товара</span>
-                    <input type="text" name="price" value="<?= $data['price'] ?>" class="add_product_input" placeholder="10000">
+                    <input type="text" name="price" value="<?= $data['price'] ?>" class="add_product_input" placeholder="10000" required>
                 </label>
                 <label class="label add_product_item">
                     <span class="label_span">Количество товара</span>
-                    <input type="text" name="count" value="<?= $data['count'] ?>" class="add_product_input" placeholder="30">
+                    <input type="text" name="count" value="<?= $data['count'] ?>" class="add_product_input" placeholder="30" required>
                 </label>
                 <label class="label add_product_img add_product_item">
                     <span id="selected-file" class="label_span add_product_input_file_name"><?= $data['img'] ?></span>
@@ -71,7 +71,7 @@ if (empty($data)) {
             </fieldset>
             <label class="label">
                 <span class="label_span">Описание товара</span>
-                <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..."><?= $data['description'] ?></textarea>
+                <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..." required><?= $data['description'] ?></textarea>
             </label>
             <input type="hidden" name="product_id" value="<?= $idProduct ?>">
         </form>

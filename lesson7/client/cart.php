@@ -74,7 +74,7 @@ if (!isset($_SESSION['user_id'])) {
         </form>
         <div class="btn_wrapper">
             <span class="catalog_item_txt">Total coast: <?= $totalCoast ?></span>
-            <a href="#" class="btn">Pay</a>
+            <a href="./create_order.php" class="btn">Create order</a>
         </div>
     </main>
 </body>

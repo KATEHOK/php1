@@ -37,26 +37,26 @@ if (!isAdmin($_SESSION['user_id'])) {
             <fieldset class="add_product_wrapper">
                 <label class="label add_product_item">
                     <span class="label_span">Название товара</span>
-                    <input type="text" name="name" placeholder="Картофан" class="input add_product_input">
+                    <input type="text" name="name" placeholder="Картофан" class="input add_product_input" required>
                 </label>
                 <label class="label add_product_item">
                     <span class="label_span">Цена товара</span>
-                    <input type="text" name="price" class="add_product_input" placeholder="10000">
+                    <input type="text" name="price" class="add_product_input" placeholder="10000" required>
                 </label>
                 <label class="label add_product_item">
                     <span class="label_span">Количество товара</span>
-                    <input type="text" name="count" class="add_product_input" placeholder="30">
+                    <input type="text" name="count" class="add_product_input" placeholder="30" required>
                 </label>
                 <label class="label add_product_img add_product_item">
                     <span id="selected-file" class="label_span add_product_input_file_name">Файл не выбран</span>
                     <span class="btn add_product_input_file_btn" id='select-img-btn'>Выбрать изображение</span>
-                    <input id="input-file" type="file" name="img" class="add_product_input_file" class="input_file">
+                    <input id="input-file" type="file" name="img" class="add_product_input_file" class="input_file" required>
                 </label>
                 <input type="submit" value="Загрузить" class="btn add_product_submit add_product_item" name="submit_btn">
             </fieldset>
             <label class="label">
                 <span class="label_span">Описание товара</span>
-                <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..."></textarea>
+                <textarea name="description" cols="40" rows="15" class="textarea add_product_input add_product_description" placeholder="Блаблабла..." required></textarea>
             </label>
         </form>
     </main>
