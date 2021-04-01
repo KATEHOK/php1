@@ -43,6 +43,7 @@ textarea {
 }
 
 .btn {
+  display: block;
   text-align: center;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;

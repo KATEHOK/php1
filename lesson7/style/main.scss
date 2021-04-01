@@ -27,30 +27,31 @@ textarea {
     }
 }
 .btn {
+    display: block;
     text-align: center;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 18px;
     box-sizing: border-box;
-        padding: 5px;
-        border-radius: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(114, 74, 0);
+    background-color: rgb(255, 216, 142);
+    border: 1px solid rgb(136, 88, 0);
+    transition: border-color 300ms ease-out,
+                background-color 300ms ease-out,
+                color 300ms ease-out;
+    &:hover {
+        color: rgb(255, 216, 142);
+        background-color: rgb(136, 88, 0);
+        border-color: rgb(114, 74, 0);
+    }
+    &:active {
         color: rgb(114, 74, 0);
         background-color: rgb(255, 216, 142);
-        border: 1px solid rgb(136, 88, 0);
-        transition: border-color 300ms ease-out,
-                    background-color 300ms ease-out,
-                    color 300ms ease-out;
-        &:hover {
-            color: rgb(255, 216, 142);
-            background-color: rgb(136, 88, 0);
-            border-color: rgb(114, 74, 0);
-        }
-        &:active {
-            color: rgb(114, 74, 0);
-            background-color: rgb(255, 216, 142);
-            border-color: rgb(136, 88, 0);
-        }
+        border-color: rgb(136, 88, 0);
+    }
 }
 .catalog {
     box-sizing: border-box;
