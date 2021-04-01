@@ -12,7 +12,8 @@ if (isset($_SESSION['user_id'])) {
         header("Location: ./admin");
         die;
     }
-    header('Location: ./client');
+    // если пользователь - клиент, то мы запускаем скрипт получения корзины из БД
+    header('Location: ./client/get_cart_from_db.php');
     die;
 }
 header('Location: ./signin.html');
