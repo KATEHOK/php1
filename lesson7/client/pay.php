@@ -72,9 +72,15 @@ if (!isset($_SESSION['user_cart'])) {
         if ($checker) {
             echo "<span class='span_empty'>Заказ создан успешно:)</span>";
             $_SESSION['user_cart'] = null;
+            $query = "delete from cart where user_id = '{$_SESSION['user_id']}'";
+            $result = mysqli_query($link, $query);
+            if ($result) {
+                echo "<span class='span_empty'>Корзина очищена</span>";
+            }
         } else { // иначе - соответствующее сообщение
             echo "<span class='span_empty'>Заказ создан с ошибками:/</span>";
         }
+        include('../private/db_close.php');
         ?>
     </main>
 </body>
