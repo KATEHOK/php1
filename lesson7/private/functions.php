@@ -17,12 +17,8 @@
 function renderCatalog($method = 'get', $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
     if (!isAdmin($_SESSION['user_id'])) {
-        echo "<div class='btn_wrapper'><a href='./cart.php' class='btn'>Cart</a>";
+        echo "<div class='btn_wrapper'><a href='./cart.php' class='btn'>Cart</a><a href='./orders.php' class='btn'>Your orders</a>";
     }
-    // учел Ваш комментарий к дз 5 урока - изменил метод передачи данных
-    // из других изменений - сделал путь к файлу-обработчику идентичным для обеих версий сайта,
-    // поэтому теперь не проверяю статус пользователя;
-    // добавил кнопку выхода с учётки
     echo "<a class='btn' href='../private/signout.php'>Sign out</a>";
     if (!isAdmin($_SESSION['user_id'])) {
         echo "</div>";
