@@ -17,7 +17,7 @@ if (!isAdmin($_SESSION['user_id'])) {
     die;
 }
 // переменные для удобства
-$idProduct = $_GET['id'];
+$idProduct = (int) $_GET['id'];
 // соединяемся с бд
 include("../private/db_open.php");
 // получаем данные из бд, преобразуем результат в объект

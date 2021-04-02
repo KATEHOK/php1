@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../');
     die;
 }
-$idProduct = $_GET['id'];
+$idProduct = (int) $_GET['id'];
 // соединяемся с бд
 include("../private/db_open.php");
 // обновляем поле количества просмотров в бд
