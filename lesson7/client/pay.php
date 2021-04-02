@@ -48,8 +48,9 @@ if (!isset($_SESSION['user_cart'])) {
         // создаем псевдослучайный id для заказа (не использую тут автоинкремент,
         // потому что далее при записи во вторую таблицу мне нужно знать id заказа)
         $order_id = time() + ((int) $user_phone);
+        $status_id = mysqli_fetch_assoc(mysqli_query($link, "select id from status where `name` = 'ordered'"))['id'];
         // запрос
-        $query = "insert into `order` (id, user_name, user_phone, user_wish) values ('$order_id', '$user_name', '$user_phone', '$user_wish');";
+        $query = "insert into `order` (id, user_id, user_name, user_phone, user_wish, order_status_id) values ('$order_id', '{$_SESSION['user_id']}', '$user_name', '$user_phone', '$user_wish', '$status_id');";
         // выполняем
         $result = mysqli_query($link, $query);
         // ошибка? - соответствующее сообщение
@@ -61,7 +62,8 @@ if (!isset($_SESSION['user_cart'])) {
         }
         // выполняем запрос о каждом товаре из сессии
         foreach ($_SESSION['user_cart'] as $product_id => $quantity) {
-            $query = "insert into order_products (order_id, product_id, quantity) values ('$order_id', '$product_id', '$quantity');";
+            $current_price = mysqli_fetch_assoc(mysqli_query($link, "select price from catalog where id = '$product_id';"))['price'];
+            $query = "insert into order_products (order_id, product_id, quantity, current_price) values ('$order_id', '$product_id', '$quantity', '$current_price');";
             $result = mysqli_query($link, $query);
             if (!$result) { // возникла ошибка - выводим сообщение
                 echo "<span class='span_empty'>Ошибка записи продукта в БД</span>";
