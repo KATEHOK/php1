@@ -410,4 +410,9 @@ textarea {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
 }
+
+.order_info {
+  -webkit-transition: none;
+  transition: none;
+}
 /*# sourceMappingURL=main.css.map */

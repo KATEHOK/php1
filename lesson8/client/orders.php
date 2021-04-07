@@ -26,7 +26,7 @@ if (!isset($_SESSION['user_id']) || isAdmin($_SESSION['user_id'])) {
 <body>
     <main class="main">
         <a href="./" class="btn">Home</a>
-        <form action="./order.php" method="post" class="catalog">
+        <form action="./order.php" method="get" class="catalog">
             <?php
             include('../private/db_open.php');
             // если связи с бд нет или поля ввода пусты, выводим соответствующее сообщение и прерываем скрипт
