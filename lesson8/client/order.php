@@ -27,6 +27,8 @@ include('./user_filter.php');
             }
             // защита для числового типа данных
             $orderId = (int) $_GET['order_id'];
+            // на случай удаления (чтоб не плодить формы)
+            $_SESSION['last_order_id'] = $orderId;
             // связываемся с бд
             include('../private/db_open.php');
             // если связь не установилась, то выводим сообщение об ошибке и завершаем скрипт
@@ -102,7 +104,10 @@ include('./user_filter.php');
                             <span class='label_span'>Your wish</span>
                             <textarea id='user_wish' class='textarea add_product_input add_product_description' class='catalog_item_txt'>{$orderData['user_wish']}</textarea>
                         </label>
-                        <input type='submit' class='btn' value='Обновить'>
+                        <div class='btn_wrapper'>
+                            <input type='submit' class='btn' value='Обновить'>
+                            <a href='./delete_order.php' class='btn'>Удалить</a>
+                        </div>
                     </form>";
             }
             // выводим список товаров заказа
