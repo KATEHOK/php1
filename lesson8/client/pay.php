@@ -34,12 +34,9 @@ if (!isset($_SESSION['user_cart'])) {
             </main></body></html>";
             die;
         }
-        // создаем псевдослучайный id для заказа (не использую тут автоинкремент,
-        // потому что далее при записи во вторую таблицу мне нужно знать id заказа)
-        $order_id = time() + ((int) $user_phone);
         $status_id = mysqli_fetch_assoc(mysqli_query($link, "select id from status where `name` = 'ordered'"))['id'];
         // запрос
-        $query = "insert into `order` (id, user_id, user_name, user_phone, user_wish, order_status_id) values ('$order_id', '{$_SESSION['user_id']}', '$user_name', '$user_phone', '$user_wish', '$status_id');";
+        $query = "insert into `order` (user_id, user_name, user_phone, user_wish, order_status_id) values ('{$_SESSION['user_id']}', '$user_name', '$user_phone', '$user_wish', '$status_id');";
         // выполняем
         $result = mysqli_query($link, $query);
         // ошибка? - соответствующее сообщение
@@ -49,6 +46,8 @@ if (!isset($_SESSION['user_cart'])) {
             </main></body></html>";
             die;
         }
+        // получаем id только что записанных данных
+        $order_id = mysqli_fetch_assoc(mysqli_query($link, "select id from `order` where user_phone = '$user_phone' order by id desc;"))['id'];
         // выполняем запрос о каждом товаре из сессии
         foreach ($_SESSION['user_cart'] as $product_id => $quantity) {
             $current_price = mysqli_fetch_assoc(mysqli_query($link, "select price from catalog where id = '$product_id';"))['price'];
