@@ -16,13 +16,16 @@
  */
 function renderCatalog($method = 'get', $productLink = './product.php', $wrapperClass = 'catalog', $itemClass = 'catalog_item', $imgClass = 'pic_mini', $emptyClass = 'span_empty', $txtClass = 'catalog_item_txt', $titleClass = 'catalog_item_title', $infoClass = 'catalog_item_info', $descriptionClass = 'catalog_item_description', $alt = 'photo')
 {
-    if (!isAdmin($_SESSION['user_id'])) {
-        echo "<div class='btn_wrapper'><a href='./cart.php' class='btn'>Cart</a><a href='./orders.php' class='btn'>Your orders</a>";
+    // далее в нескольких местах будет использоваться
+    $isAdmin = isAdmin($_SESSION['user_id']);
+    echo "<div class='btn_wrapper'>";
+    if (!$isAdmin) {
+        echo "<a href='./cart.php' class='btn'>Cart</a><a href='./orders.php' class='btn'>Your orders</a>";
+    } else {
+        echo "<a href='./order_list.php' class='btn'>Order list</a>";
     }
-    echo "<a class='btn' href='../private/signout.php'>Sign out</a>";
-    if (!isAdmin($_SESSION['user_id'])) {
-        echo "</div>";
-    }
+    echo "<a class='btn' href='../private/signout.php'>Sign out</a>
+    </div>";
     // пути к файлам с открытием и закрытием бд идентичны для обеих версий страницы, поэтому просто импортируем их
     include('../private/db_open.php');
     // выполняем запрос к бд для получения информации о продуктах каталога

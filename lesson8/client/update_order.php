@@ -1,5 +1,7 @@
 <?php
 include('./user_filter.php');
+// TO DO 
+// сделать обновление товара!
 ?>
 <!DOCTYPE html>
 <html lang="en">
