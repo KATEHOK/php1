@@ -35,7 +35,7 @@ require_once('./user_filter.php');
             }
             $len = (int) mysqli_fetch_assoc($len)['counter'];
             // нет заказов - сообщение, стоп
-            if ($len == 0) {
+            if ($len === 0) {
                 echo "<span class='span_empty'>No orders</span>
                 </form></main></body></html>";
                 die;

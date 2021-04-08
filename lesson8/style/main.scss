@@ -279,3 +279,9 @@ textarea {
 .order_info {
     transition: none;
 }
+.radio {
+    &_input:checked ~ &_span {
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}

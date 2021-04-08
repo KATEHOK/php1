@@ -415,4 +415,9 @@ textarea {
   -webkit-transition: none;
   transition: none;
 }
+
+.radio_input:checked ~ .radio_span {
+  font-weight: 700;
+  text-transform: uppercase;
+}
 /*# sourceMappingURL=main.css.map */
