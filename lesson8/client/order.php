@@ -18,20 +18,25 @@ include('./user_filter.php');
         <div class='main_product_wrapper'>
             <a class='btn' href='./orders.php'>Your orders</a>
             <?php
+            // если не пришел id, то выводим сообщение, завершаем скрипт
             if (!isset($_GET['order_id'])) {
                 echo "
                 <span class='span_empty'>Заказ не найден!</span>
                 </div></main></body></html>";
                 die;
             }
+            // защита для числового типа данных
             $orderId = (int) $_GET['order_id'];
+            // связываемся с бд
             include('../private/db_open.php');
+            // если связь не установилась, то выводим сообщение об ошибке и завершаем скрипт
             if (!$link) {
                 echo "
                 <span class='span_empty'>Ошибка связи с БД: " . mysqli_connect_error() . "</span>
                 </div></main></body></html>";
                 die;
             }
+            // запрос на получение данных по каждому товару из заказа
             $query = "
             select
                 order_products.quantity as product_quantity,
@@ -44,12 +49,14 @@ include('./user_filter.php');
                 inner join catalog on order_products.product_id = catalog.id
                 where `order`.id = $orderId;";
             $data = mysqli_query($link, $query);
+            // если данные не получены, выводим сообщение, завершаем скрипт
             if (!$data) {
                 echo "
                 <span class='span_empty'>Не удалось получить данные заказа ID: $orderId</span>
                 </div></main></body></html>";
                 die;
             }
+            // запрос на получение данных заказа (общих для всех товаров)
             $query = "
             select
                 `order`.id as order_id,
@@ -62,7 +69,9 @@ include('./user_filter.php');
                 inner join `order` on `order`.order_status_id = status.id
                 where `order`.id = $orderId;";
             $orderData = mysqli_fetch_assoc(mysqli_query($link, $query));
+            // считаем общую стоимость
             $totalCoast = 0;
+            // выводим инфу заказа
             if ($orderData['status_name'] != 'ordered') {
                 echo "
                     <div class='catalog_item order_info'>
@@ -74,6 +83,7 @@ include('./user_filter.php');
                         <p class='catalog_item_txt'>Your wish: {$orderData['user_wish']}</p>
                     </div>";
             } else {
+                // если заказ ещё не обработан, то его можно редактировать
                 echo "
                     <script defer src='../js/can_update_order.js'></script>
                     <form id='form' method='get' action='./update_order.php' class='catalog_item order_info'>
@@ -95,8 +105,10 @@ include('./user_filter.php');
                         <input type='submit' class='btn' value='Обновить'>
                     </form>";
             }
+            // выводим список товаров заказа
             echo "<div class='catalog'>";
             while ($row = mysqli_fetch_assoc($data)) {
+                // считаем полную стоимость товара и обновляем общую стоимость заказа
                 $totalPrice = $row['current_price'] * $row['product_quantity'];
                 $totalCoast += $totalPrice;
                 echo "
@@ -110,7 +122,7 @@ include('./user_filter.php');
                     </div>";
             }
             echo "</div>";
-            var_dump($orderData['status_name']);
+            // закрываем бд
             include('../private/db_close.php');
             ?>
             <span class='btn order_info'>Total coast: <?= $totalCoast ?></span>
