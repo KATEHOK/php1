@@ -68,7 +68,7 @@ if (!isset($_SESSION['user_cart'])) {
         $query = "delete from cart where user_id = '{$_SESSION['user_id']}'";
         $result = mysqli_query($link, $query);
         if ($result) {
-            $_SESSION['user_cart'] = null;
+            unset($_SESSION['user_cart']);
             echo "<span class='span_empty'>Корзина очищена</span>";
         }
         include('../private/db_close.php');
