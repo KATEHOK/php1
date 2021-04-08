@@ -1,19 +1,5 @@
 <?php
-const strict_types = 1;
-ini_set('error_reporting', (string)E_ALL);
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-session_start();
-// подключаем файл функций
-require_once('../private/functions.php');
-// проверяем статус пользователя
-// если пользователь не зарегистрирован или
-// если пользователь - админ, то мы выгоняем его из этого скрипта
-if (!isset($_SESSION['user_id']) || isAdmin($_SESSION['user_id'])) {
-    // переадрессация на индекс-файл сайта
-    header("Location: ../");
-    die;
-}
+include('./user_filter.php');
 // подключаем бд
 include('../private/db_open.php');
 // если соединение не было установлено, то мы предлагаем пользователю выбор либо выйти,
