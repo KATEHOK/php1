@@ -154,7 +154,7 @@ $orderId = (int) $_GET['order_id'];
                     </label>
                 </div>";
             }
-            $template = $template . "</fieldset>";
+            $template = $template . "</fieldset><input type='submit' value='Применить' class='btn'>";
             // выводим разметку (использую переменную, чтобы в случае возникновения 
             // ошибки на промежуточном этапе получения данных не выводить никакой информации о заказе)
             echo $template;
