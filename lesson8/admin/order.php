@@ -24,7 +24,7 @@ $orderId = (int) $_GET['order_id'];
             <a href="./order_list.php" class="btn">Back</a>
         </div>
         <!-- Использую post, чтобы застраховаться от "корректировки" пользователем имени статуса (тк они заданы по умолчанию) -->
-        <form action="./change_order.php" method="post" class="catalog admin_order">
+        <form action="./process_order.php" method="post" class="catalog admin_order" id='form'>
             <?php
             // подкдлючаем бд
             include('../private/db_open.php');
@@ -65,7 +65,7 @@ $orderId = (int) $_GET['order_id'];
                 <fieldset class='register_fieldset status_list admin_order_item_item'>
                     <span class='catalog_item_txt'>Order&nbsp;status</span>
                     <label class='btn radio_label'>
-                        <input type='radio' name='status_radio' class='hide radio_input'";
+                        <input type='radio' name='status_radio' id='ordered' class='hide radio_input'";
             // если в бд текущий статус - checked (далее не комментирую этот момент)
             if ($statusName == 'ordered') {
                 $template = $template . "checked";
@@ -75,7 +75,7 @@ $orderId = (int) $_GET['order_id'];
                         <span class='label_span radio_span'>ordered</span>
                     </label>
                     <label class='btn radio_label'>
-                        <input type='radio' name='status_radio' class='hide radio_input'";
+                        <input type='radio' name='status_radio' id='sent' class='hide radio_input'";
             if ($statusName == 'sent') {
                 $template = $template . "checked";
             }
@@ -83,7 +83,7 @@ $orderId = (int) $_GET['order_id'];
                         <span class='label_span radio_span'>sent</span>
                     </label>
                     <label class='btn radio_label'>
-                        <input type='radio' name='status_radio' class='hide radio_input'";
+                        <input type='radio' name='status_radio' id='canceled' class='hide radio_input'";
             if ($statusName == 'canceled') {
                 $template = $template . "checked";
             }
@@ -117,7 +117,7 @@ $orderId = (int) $_GET['order_id'];
                 </label>
                 <label class='label'>
                     <span class='catalog_item_txt'>Clients phone</span>
-                    <input type='text' value='{$data['user_phone']}' name='user_phone' class='add_product_input'
+                    <input type='text' id='user_phone' value='{$data['user_phone']}' name='user_phone' class='add_product_input'
                         placeholder='8(800)555-35-35' required>
                 </label>
                 <label class='label'>
@@ -142,19 +142,22 @@ $orderId = (int) $_GET['order_id'];
                 die;
             }
             // дописываем в разметку данные о продуктах
-            $template = $template . "<fieldset class='admin_order_item'>";
+            $template = $template . "
+            <script defer src='../js/client_order.js'></script>
+            <fieldset class='admin_order_item'>";
             while ($dataRow = mysqli_fetch_assoc($data)) {
                 $template = $template . "
                 <div class='admin_order_item_product'>
                     <span class='catalog_item_txt'>Product ID: {$dataRow['product_id']}</span>
                     <span class='catalog_item_txt'>Count in base: {$dataRow['count_in_base']}</span>
                     <label class='catalog_item_txt'>
-                        <input type='checkbox' name='processed' class='hide admin_order_item_product_checkbox'>
+                        <input type='checkbox' name='processed' value='{$dataRow['product_id']}' class='hide admin_order_item_product_checkbox'>
                         <span class='btn'>Processed</span>
                     </label>
                 </div>";
             }
-            $template = $template . "</fieldset><input type='submit' value='Применить' class='btn'>";
+            $template = $template . "</fieldset>
+            <input type='hidden' name='order_id' value='$orderId'><input type='submit' value='Применить' class='btn'>";
             // выводим разметку (использую переменную, чтобы в случае возникновения 
             // ошибки на промежуточном этапе получения данных не выводить никакой информации о заказе)
             echo $template;
