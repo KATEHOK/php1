@@ -24,7 +24,7 @@ $orderId = (int) $_GET['order_id'];
             <a href="./order_list.php" class="btn">Back</a>
         </div>
         <!-- Использую post, чтобы застраховаться от "корректировки" пользователем имени статуса (тк они заданы по умолчанию) -->
-        <form action="./change_order.php" method="post">
+        <form action="./change_order.php" method="post" class="catalog admin_order">
             <?php
             // подкдлючаем бд
             include('../private/db_open.php');
@@ -40,33 +40,124 @@ $orderId = (int) $_GET['order_id'];
             $len = (int) mysqli_fetch_assoc($len)['counter'];
             // нет заказов - сообщение, стоп
             if ($len === 0) {
-                echo "<span class='span_empty'>No products</span>
+                echo "<span class='span_empty'>No orders</span>
                 </form></main></body></html>";
                 die;
             }
+            // запрос на получение названий статусов
             $query = "
-            select status.name as status_name from status
+            select
+                status.name as status_name
+            from status
                 inner join `order` on `order`.order_status_id = status.id
             where `order`.id = '$orderId';";
-            $statusName = mysqli_fetch_assoc(mysqli_query($link, $query))['status_name'];
-            ?>
-            <fieldset class="btn_wrapper register_fieldset">
-                <legend>Order status</legend>
-                <label class="btn radio_label">
-                    <input type="radio" name="status_radio" class="hide radio_input" <?php if ($statusName == 'ordered') echo "checked"; ?>>
-                    <span class="label_span radio_span">ordered</span>
+            $statusName = mysqli_query($link, $query);
+            // ошибка - сообщение
+            if (!$statusName) {
+                echo "<span class='span_empty'>DB Error: " . mysqli_error($link) . "</span>
+                </form></main></body></html>";
+                die;
+            }
+            $statusName = mysqli_fetch_assoc($statusName)['status_name'];
+            // буду записывать в переменную разметку
+            $template = "
+            <fieldset class='admin_order_item'>
+                <fieldset class='register_fieldset status_list admin_order_item_item'>
+                    <span class='catalog_item_txt'>Order&nbsp;status</span>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'";
+            // если в бд текущий статус - checked (далее не комментирую этот момент)
+            if ($statusName == 'ordered') {
+                $template = $template . "checked";
+            }
+            // дописываем разметку
+            $template = $template . ">
+                        <span class='label_span radio_span'>ordered</span>
+                    </label>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'";
+            if ($statusName == 'sent') {
+                $template = $template . "checked";
+            }
+            $template = $template . ">
+                        <span class='label_span radio_span'>sent</span>
+                    </label>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'";
+            if ($statusName == 'canceled') {
+                $template = $template . "checked";
+            }
+            $template = $template . ">
+                        <span class='label_span radio_span'>canceled</span>
+                    </label>
+                </fieldset>";
+            // запрос на получение общих данных заказа
+            $query = "
+            select
+                user_name,
+                datetime,
+                user_wish,
+                user_phone
+            from `order`
+            where `order`.id = $orderId";
+            $data = mysqli_query($link, $query);
+            // ошибка - сообщение
+            if (!$data) {
+                echo "<span class='span_empty'>DB Error: " . mysqli_error($link) . "</span>
+                </form></main></body></html>";
+                die;
+            }
+            $data = mysqli_fetch_assoc($data);
+            // дописываем разметку, используя полученные данные
+            $template = $template . "
+            <fieldset class='register_fieldset status_list admin_order_item_item'>
+                <label class='label'>
+                    <span class='catalog_item_txt'>Clients name</span>
+                    <p class='add_product_input'>{$data['user_name']}</p>
                 </label>
-                <label class="btn radio_label">
-                    <input type="radio" name="status_radio" class="hide radio_input" <?php if ($statusName == 'sent') echo "checked"; ?>>
-                    <span class="label_span radio_span">sent</span>
+                <label class='label'>
+                    <span class='catalog_item_txt'>Clients phone</span>
+                    <input type='text' value='{$data['user_phone']}' name='user_phone' class='add_product_input'
+                        placeholder='8(800)555-35-35' required>
                 </label>
-                <label class="btn radio_label">
-                    <input type="radio" name="status_radio" class="hide radio_input" <?php if ($statusName == 'canceled') echo "checked"; ?>>
-                    <span class="label_span radio_span">canceled</span>
+                <label class='label'>
+                    <span class='catalog_item_txt'>Clients user_wish</span>
+                    <p class='add_product_input'>{$data['user_wish']}</p>
                 </label>
             </fieldset>
-            <?php
-            // Проект не доделан!
+            </fieldset>";
+            // запрос на получение данных о каждом продукте заказа
+            $query = "
+            select
+                catalog.id as product_id,
+                catalog.count as count_in_base
+            from catalog
+                inner join order_products on order_products.product_id = catalog.id
+            where order_id = $orderId;";
+            $data = mysqli_query($link, $query);
+            // ошибка - сообщение
+            if (!$data) {
+                echo "<span class='span_empty'>DB Error: " . mysqli_error($link) . "</span>
+                </form></main></body></html>";
+                die;
+            }
+            // дописываем в разметку данные о продуктах
+            $template = $template . "<fieldset class='admin_order_item'>";
+            while ($dataRow = mysqli_fetch_assoc($data)) {
+                $template = $template . "
+                <div class='admin_order_item_product'>
+                    <span class='catalog_item_txt'>Product ID: {$dataRow['product_id']}</span>
+                    <span class='catalog_item_txt'>Count in base: {$dataRow['count_in_base']}</span>
+                    <label class='catalog_item_txt'>
+                        <input type='checkbox' name='processed' class='hide admin_order_item_product_checkbox'>
+                        <span class='btn'>Processed</span>
+                    </label>
+                </div>";
+            }
+            $template = $template . "</fieldset>";
+            // выводим разметку (использую переменную, чтобы в случае возникновения 
+            // ошибки на промежуточном этапе получения данных не выводить никакой информации о заказе)
+            echo $template;
             // закрываем бд
             include('../private/db_close.php');
             ?>

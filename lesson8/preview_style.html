@@ -12,6 +12,59 @@
 </head>
 
 <body>
+    <main class="main">
+        <div class="btn_wrapper">
+            <a href="./" class="btn">Home</a>
+            <a href="./order_list.php" class="btn">Back</a>
+        </div>
+        <!-- Использую post, чтобы застраховаться от "корректировки" пользователем имени статуса (тк они заданы по умолчанию) -->
+        <form action='./change_order.php' method='post' class='catalog admin_order'>
+            <fieldset class='admin_order_item'>
+                <fieldset class='register_fieldset status_list admin_order_item_item'>
+                    <span class='catalog_item_txt'>Order&nbsp;status</span>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input' checked=''>
+                        <span class='label_span radio_span'>ordered</span>
+                    </label>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'>
+                        <span class='label_span radio_span'>sent</span>
+                    </label>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'>
+                        <span class='label_span radio_span'>canceled</span>
+                    </label>
+                </fieldset>
+                <fieldset class='register_fieldset status_list admin_order_item_item'>
+                    <label class='label'>
+                        <span class='catalog_item_txt'>Clients name</span>
+                        <p class='add_product_input'>srvsers</p>
+                    </label>
+                    <label class='label'>
+                        <span class='catalog_item_txt'>Clients phone</span>
+                        <input type='text' value='serves' name='user_phone' class='add_product_input'
+                            placeholder='8(800)555-35-35' required=''>
+                    </label>
+                    <label class='label'>
+                        <span class='catalog_item_txt'>Clients user_wish</span>
+                        <p class='add_product_input'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
+                            dolorem incidunt aspernatur natus, assumenda consequatur inventore ex sed? Quae, nobis!
+                            Adipisci pariatur porro animi molestias ea in beatae, placeat totam?</p>
+                    </label>
+                </fieldset>
+            </fieldset>
+            <fieldset class='admin_order_item'>
+                <div class='admin_order_item_product'>
+                    <span class='catalog_item_txt'>Product ID: 46354564</span>
+                    <span class='catalog_item_txt'>Count in base: 564</span>
+                    <label class='catalog_item_txt'>
+                        <input type='checkbox' name='processed' class='hide admin_order_item_product_checkbox'>
+                        <span class='btn'>Processed</span>
+                    </label>
+                </div>
+            </fieldset>
+        </form>
+    </main>
     <!-- <main class='main_product'>
         <div class='main_product_wrapper'>
             <div class="btn_wrapper">

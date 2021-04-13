@@ -285,3 +285,40 @@ textarea {
         text-transform: uppercase;
     }
 }
+.admin_order {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_item {
+        width: 100%;
+        border: none;
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+        &:last-child {
+            margin: 0;
+        }
+        &_item {
+            max-width: 70%;
+        }
+        &_product {
+            margin-top: 10px;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 5px;
+            color: rgb(114, 74, 0);
+            background-color: rgb(255, 216, 142);
+            border: 1px solid rgb(136, 88, 0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            &_checkbox:checked ~ .btn {
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+        }
+    }
+}

@@ -420,4 +420,66 @@ textarea {
   font-weight: 700;
   text-transform: uppercase;
 }
+
+.admin_order {
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin_order_item {
+  width: 100%;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin-bottom: 15px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.admin_order_item:last-child {
+  margin: 0;
+}
+
+.admin_order_item_item {
+  max-width: 70%;
+}
+
+.admin_order_item_product {
+  margin-top: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  color: #724a00;
+  background-color: #ffd88e;
+  border: 1px solid #885800;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin_order_item_product_checkbox:checked ~ .btn {
+  text-transform: uppercase;
+  font-weight: 700;
+}
 /*# sourceMappingURL=main.css.map */
