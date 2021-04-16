@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!-- <script defer src="js/main.js"></script> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyShop</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+    <main class="main">
+        <div class="btn_wrapper">
+            <a href="./" class="btn">Home</a>
+            <a href="./order_list.php" class="btn">Back</a>
+        </div>
+        <!-- Использую post, чтобы застраховаться от "корректировки" пользователем имени статуса (тк они заданы по умолчанию) -->
+        <form action='./change_order.php' method='post' class='catalog admin_order'>
+            <fieldset class='admin_order_item'>
+                <fieldset class='register_fieldset status_list admin_order_item_item'>
+                    <span class='catalog_item_txt'>Order&nbsp;status</span>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input' checked=''>
+                        <span class='label_span radio_span'>ordered</span>
+                    </label>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'>
+                        <span class='label_span radio_span'>sent</span>
+                    </label>
+                    <label class='btn radio_label'>
+                        <input type='radio' name='status_radio' class='hide radio_input'>
+                        <span class='label_span radio_span'>canceled</span>
+                    </label>
+                </fieldset>
+                <fieldset class='register_fieldset status_list admin_order_item_item'>
+                    <label class='label'>
+                        <span class='catalog_item_txt'>Clients name</span>
+                        <p class='add_product_input'>srvsers</p>
+                    </label>
+                    <label class='label'>
+                        <span class='catalog_item_txt'>Clients phone</span>
+                        <input type='text' value='serves' name='user_phone' class='add_product_input'
+                            placeholder='8(800)555-35-35' required=''>
+                    </label>
+                    <label class='label'>
+                        <span class='catalog_item_txt'>Clients user_wish</span>
+                        <p class='add_product_input'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
+                            dolorem incidunt aspernatur natus, assumenda consequatur inventore ex sed? Quae, nobis!
+                            Adipisci pariatur porro animi molestias ea in beatae, placeat totam?</p>
+                    </label>
+                </fieldset>
+            </fieldset>
+            <fieldset class='admin_order_item'>
+                <div class='admin_order_item_product'>
+                    <span class='catalog_item_txt'>Product ID: 46354564</span>
+                    <span class='catalog_item_txt'>Count in base: 564</span>
+                    <label class='catalog_item_txt'>
+                        <input type='checkbox' name='processed' class='hide admin_order_item_product_checkbox'>
+                        <span class='btn'>Processed</span>
+                    </label>
+                </div>
+            </fieldset>
+            <input type='submit' value='Применить' class='btn'>
+        </form>
+    </main>
+    <!-- <main class='main_product'>
+        <div class='main_product_wrapper'>
+            <div class="btn_wrapper">
+                <a href='./' class='btn back'>Home</a>
+                <a href="./cart.php" class="btn back">Cart</a>
+            </div>
+            <div class='product_wrapper'>
+                <a href='img/123.png' class='product_img_wrapper' target='_blank'><img src='img/123.png'
+                        class='product_img' alt='photo'></a>
+                <form class='product_info catalog_item_info' method="get" action="./add_to_cart.php">
+                    <span class='catalog_item_txt catalog_item_title'>Laptop</span>
+                    <p class='catalog_item_txt catalog_item_description product_info_description'>Lorem ipsum dolor sit
+                        amet consectetur, adipisicing elit. Molestiae, dignissimos? Deleniti in distinctio qui modi
+                        fugit eos excepturi molestiae exercitationem? Ducimus, vitae dignissimos! Iste officia nam
+                        officiis dicta magnam. Tempore?</p>
+                    <div class='product_info_wrapper'>
+                        <span class='catalog_item_txt product_info_wrapper_item'>Price: 415</span>
+                        <span class='catalog_item_txt product_info_wrapper_item'>Count: 415</span>
+                        <span class='catalog_item_txt product_info_wrapper_item'>Views: 415</span>
+                    </div>
+                    <input type="hidden" name="product_id" value="">
+                    <input type="submit" class="btn" value="Buy">
+                </form>
+            </div>
+        </div>
+    </main> -->
+
+    <!-- <main class="main">
+        <form action="#" method="post" class="product_wrapper signin_form">
+            <label class="label">
+                <span class="label_span">Login</span>
+                <input type="text" name="login" class="add_product_input">
+            </label>
+            <label class="label">
+                <span class="label_span">Password</span>
+                <input type="password" name="password" class="add_product_input">
+            </label>
+            <input type="submit" value="Sign in" class="btn">
+        </form>
+    </main> -->
+
+    <!-- <main class='main_product'>
+        <div class="main_product_wrapper">
+            <a href='/' class='btn back'>На главную</a>
+            <div class='product_wrapper'>
+                <a href='img/123.png' class='product_img_wrapper' target='_blank'><img src='img/123.png'
+                        class='product_img' alt='photo'></a>
+                <div class="product_info catalog_item_info">
+                    <span class="catalog_item_txt catalog_item_title">Laptop</span>
+                    <p class="catalog_item_txt catalog_item_description product_info_description">Lorem ipsum dolor sit,
+                        amet consectetur
+                        adipisicing elit. Maiores
+                        ducimus facilis beatae quis sed dolor corrupti. Vitae magnam labore reiciendis eum est ducimus
+                        iusto unde laboriosam, ipsam incidunt et accusantium?</p>
+                    <div class="product_info_wrapper">
+                        <span class="catalog_item_txt product_info_wrapper_item">Price: 1500.00</span>
+                        <span class="catalog_item_txt product_info_wrapper_item">Count: 64</span>
+                        <span class="catalog_item_txt product_info_wrapper_item">Views: 534</span>
+                    </div>
+                    <div class="admin_controls">
+                        <form action='#' method="post">
+                            <input type="hidden" name="id" value='id'>
+                            <input type="submit" value="Редактировать" class="btn">
+                        </form>
+                        <form action='#' method="post">
+                            <input type="hidden" name="id" value='id'>
+                            <input type="submit" value="Удалить" class="btn">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> -->
+
+    <!-- <main class="main">
+        <a href="../" class="back">На главную</a>
+        <form method="post" enctype="multipart/form-data" class="add_product catalog" action="./upload.php">
+            <fieldset class="add_product_wrapper">
+                <label class="label add_product_item">
+                    <span class="label_span">Название товара</span>
+                    <input type="text" name="name" placeholder="Картофан" class="input add_product_input">
+                </label>
+                <label class="label add_product_item">
+                    <span class="label_span">Цена товара</span>
+                    <input type="text" name="price" class="add_product_input" placeholder="10000">
+                </label>
+                <label class="label add_product_item">
+                    <span class="label_span">Количество товара</span>
+                    <input type="text" name="count" class="add_product_input" placeholder="30">
+                </label>
+                <label class="label add_product_img add_product_item">
+                    <span id="selected-file" class="label_span add_product_input_file_name">Файл не выбран</span>
+                    <span class="btn add_product_input_file_btn" id='select-img-btn'>Выбрать изображение</span>
+                    <input id="input-file" type="file" name="img" class="add_product_input_file" class="input_file">
+                </label>
+                <input type="submit" value="Загрузить" class="btn add_product_submit add_product_item"
+                    name="submit_btn">
+            </fieldset>
+            <label class="label">
+                <span class="label_span">Описание товара</span>
+                <input type="hidden" name="user_id" value="">
+                <textarea name="description" cols="40" rows="15"
+                    class="textarea add_product_input add_product_description" placeholder="Блаблабла..."></textarea>
+            </label>
+        </form>
+    </main> -->
+
+    <!-- <main class="main">
+        <form action='#' method='post' class='catalog'>
+            <label class='catalog_item'>
+                <input type='submit' value='#' name='link' class='hide'>
+                <p class='catalog_item_txt catalog_item_title'>Laptop</p>
+                <img src='img/123.png' alt='$alt' class='pic_mini'>
+                <div class="catalog_item_info">
+                    <p class='catalog_item_txt'>Price: 999</p>
+                    <p class='catalog_item_txt'>Count: 5</p>
+                    <p class='catalog_item_txt'>Views: 0</p>
+                </div>
+                <p class='catalog_item_txt catalog_item_description'>Lorem ipsum, dolor sit amet consectetur adipisicing
+                    elit. Ea vero
+                    exercitationem quo fugit sapiente accusamus odio, tempore deserunt aspernatur unde atque ipsa at
+                    repudiandae corrupti. Soluta asperiores quo nam exercitationem.</p>
+            </label>
+        </form>
+        <form action='./private/add_product.php' method='post'>
+            <input type='hidden' name='user_id' value='1'>
+            <input type='submit' value='Добавить новый товар' class='btn'>
+        </form>
+        <a href="./client.php">Клиентская</a>
+    </main> -->
+</body>
+
+</html>

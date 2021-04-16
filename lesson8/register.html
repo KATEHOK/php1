@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyShop Register</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+    <main class="main">
+        <form action="private/register.php" method="post" class="product_wrapper signin_form">
+            <fieldset class="register_fieldset">
+                <label class="label register_item">
+                    <span class="label_span">Print your name</span>
+                    <input type="text" name="user_name" class="add_product_input" placeholder="Василий Пупкин" required>
+                </label>
+                <label class="label register_item">
+                    <span class="label_span">Print your status</span>
+                    <input type="text" name="status" class="add_product_input" placeholder="admin">
+                </label>
+            </fieldset>
+            <fieldset class="register_fieldset">
+                <label class="label register_item">
+                    <span class="label_span">Create login</span>
+                    <input type="text" name="login" class="add_product_input" placeholder="UserLogin" required>
+                </label>
+                <label class="label register_item">
+                    <span class="label_span">Create password</span>
+                    <input type="password" name="password" class="add_product_input" placeholder="UserPassword"
+                        required>
+                </label>
+            </fieldset>
+            <fieldset class="register_fieldset">
+                <a href="./" class="btn">Back</a>
+                <input type="submit" value="Register now" class="btn">
+            </fieldset>
+        </form>
+    </main>
+</body>
+
+</html>
