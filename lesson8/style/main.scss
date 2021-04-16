@@ -315,13 +315,22 @@ textarea {
             display: flex;
             flex-direction: column;
             align-items: center;
-            &_checkbox:checked ~ .btn {
-                text-transform: uppercase;
-                font-weight: 700;
-            }
         }
     }
 }
 .red_txt {
     color: rgb(179, 0, 0);
+}
+.big_txt {
+    text-transform: uppercase;
+    font-weight: 700;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(114, 74, 0);
+    background-color: rgb(255, 216, 142);
+    border: 1px solid rgb(136, 88, 0);
+}
+.status_list {
+    align-items: center;
 }

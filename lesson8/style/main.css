@@ -478,12 +478,25 @@ textarea {
           align-items: center;
 }
 
-.admin_order_item_product_checkbox:checked ~ .btn {
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
 .red_txt {
   color: #b30000;
+}
+
+.big_txt {
+  text-transform: uppercase;
+  font-weight: 700;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px;
+  border-radius: 5px;
+  color: #724a00;
+  background-color: #ffd88e;
+  border: 1px solid #885800;
+}
+
+.status_list {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=main.css.map */
