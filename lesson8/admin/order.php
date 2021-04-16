@@ -65,7 +65,7 @@ $orderId = (int) $_GET['order_id'];
                 <fieldset class='register_fieldset status_list admin_order_item_item'>
                     <span class='catalog_item_txt'>Order&nbsp;status</span>
                     <label class='btn radio_label'>
-                        <input type='radio' name='status_radio' id='ordered' class='hide radio_input'";
+                        <input type='radio' name='status_radio' value='ordered' class='hide radio_input'";
             // если в бд текущий статус - checked (далее не комментирую этот момент)
             if ($statusName == 'ordered') {
                 $template = $template . "checked";
@@ -75,7 +75,7 @@ $orderId = (int) $_GET['order_id'];
                         <span class='label_span radio_span'>ordered</span>
                     </label>
                     <label class='btn radio_label'>
-                        <input type='radio' name='status_radio' id='sent' class='hide radio_input'";
+                        <input type='radio' name='status_radio' value='sent' class='hide radio_input'";
             if ($statusName == 'sent') {
                 $template = $template . "checked";
             }
@@ -83,7 +83,7 @@ $orderId = (int) $_GET['order_id'];
                         <span class='label_span radio_span'>sent</span>
                     </label>
                     <label class='btn radio_label'>
-                        <input type='radio' name='status_radio' id='canceled' class='hide radio_input'";
+                        <input type='radio' name='status_radio' value='canceled' class='hide radio_input'";
             if ($statusName == 'canceled') {
                 $template = $template . "checked";
             }
@@ -121,7 +121,7 @@ $orderId = (int) $_GET['order_id'];
                         placeholder='8(800)555-35-35' required>
                 </label>
                 <label class='label'>
-                    <span class='catalog_item_txt'>Clients user_wish</span>
+                    <span class='catalog_item_txt'>Clients wish</span>
                     <p class='add_product_input'>{$data['user_wish']}</p>
                 </label>
             </fieldset>
@@ -129,6 +129,7 @@ $orderId = (int) $_GET['order_id'];
             // запрос на получение данных о каждом продукте заказа
             $query = "
             select
+                quantity,
                 catalog.id as product_id,
                 catalog.count as count_in_base
             from catalog
@@ -143,21 +144,34 @@ $orderId = (int) $_GET['order_id'];
             }
             // дописываем в разметку данные о продуктах
             $template = $template . "
-            <script defer src='../js/client_order.js'></script>
             <fieldset class='admin_order_item'>";
+            $status = true;
             while ($dataRow = mysqli_fetch_assoc($data)) {
+                $quantity = $dataRow['quantity'];
+                $countInBase = $dataRow['count_in_base'];
+                $classRed = '';
+                // если количество товаров на складе меньше количества заказанных, создаем класс цвета текста
+                if ($quantity > $countInBase) {
+                    $status = false;
+                    $classRed = ' red_txt';
+                }
+                // если нужно, вписываем класс
                 $template = $template . "
                 <div class='admin_order_item_product'>
                     <span class='catalog_item_txt'>Product ID: {$dataRow['product_id']}</span>
-                    <span class='catalog_item_txt'>Count in base: {$dataRow['count_in_base']}</span>
-                    <label class='catalog_item_txt'>
-                        <input type='checkbox' name='processed' value='{$dataRow['product_id']}' class='hide admin_order_item_product_checkbox'>
-                        <span class='btn'>Processed</span>
-                    </label>
+                    <span class='catalog_item_txt$classRed'>Quantity: $quantity</span>
+                    <span class='catalog_item_txt$classRed'>Count in base: $countInBase</span>
+                    <input type='hidden' name='product_id[]' value='{$dataRow['product_id']}'>
                 </div>";
             }
             $template = $template . "</fieldset>
-            <input type='hidden' name='order_id' value='$orderId'><input type='submit' value='Применить' class='btn'>";
+            <input type='hidden' name='order_id' value='$orderId'>";
+            // если в предыдущем цикле внезапно хоть одна ошибка, е выводим настоящей кнопки
+            if ($status) {
+                $template = $template . "<input type='submit' value='Применить' class='btn'>";
+            } else {
+                $template = $template . "<span class='btn'>Применить</span>";
+            }
             // выводим разметку (использую переменную, чтобы в случае возникновения 
             // ошибки на промежуточном этапе получения данных не выводить никакой информации о заказе)
             echo $template;
